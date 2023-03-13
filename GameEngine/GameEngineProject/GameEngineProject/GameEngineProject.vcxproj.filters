@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Arquivos de Origem">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Recurso">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Components">
+      <UniqueIdentifier>{995e8fee-f6d4-463c-a4e4-1b8c5e696bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Components">
+      <UniqueIdentifier>{d52a6508-c219-41ee-bbb1-914335058b55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Misc">
+      <UniqueIdentifier>{8d084c21-9039-4f9c-ab45-406d2b8f2fdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Subsystems">
+      <UniqueIdentifier>{209aacee-c14f-4a3b-8b09-ae4a52e8e17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Misc">
+      <UniqueIdentifier>{2c1c19f5-b913-488e-b97c-6ab802443bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Subsystems">
+      <UniqueIdentifier>{cd59841b-7da3-4623-8e3b-5d6e917d4a06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho\Event">
+      <UniqueIdentifier>{4c6e5fcb-cf67-4504-b0b6-3b453eaac8d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Event">
+      <UniqueIdentifier>{7512f5e0-0b24-4d93-b24e-360f939717fe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Arquivos de Origem\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSubsystem.cpp">
+      <Filter>Arquivos de Origem\Subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSubsystem.cpp">
+      <Filter>Arquivos de Origem\Subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Arquivos de Origem\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineProject.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="EventQueue.cpp">
+      <Filter>Arquivos de Origem\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleColl2D.cpp">
+      <Filter>Arquivos de Origem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxColl2D.cpp">
+      <Filter>Arquivos de Origem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxShape2D.cpp">
+      <Filter>Arquivos de Origem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="IOComponent.cpp">
+      <Filter>Arquivos de Origem\Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GraphicsSubsystem.h">
+      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSubsystem.h">
+      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Arquivos de Cabeçalho\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxColl2D.h">
+      <Filter>Arquivos de Cabeçalho\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleColl2D.h">
+      <Filter>Arquivos de Cabeçalho\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxShape2D.h">
+      <Filter>Arquivos de Cabeçalho\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Arquivos de Cabeçalho\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Arquivos de Cabeçalho\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Arquivos de Cabeçalho\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Arquivos de Cabeçalho\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Subsystem.h">
+      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Arquivos de Cabeçalho\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviour.h">
+      <Filter>Arquivos de Cabeçalho\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="EventQueue.h">
+      <Filter>Arquivos de Cabeçalho\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Arquivos de Cabeçalho\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="IOSubsystem.h">
+      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="IOComponent.h">
+      <Filter>Arquivos de Cabeçalho\Components</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
