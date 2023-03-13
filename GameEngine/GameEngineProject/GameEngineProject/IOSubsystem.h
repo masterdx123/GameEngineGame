@@ -12,12 +12,12 @@ public:
 
 	};
 
-	Component* addComponent(Component* component_);
-	inline void removeComponent(int i_) { components->erase(components->begin() + i_); }
-	inline Component* getComponent(int i_) { return &(components->at(i_)); }
+	Component* AddComponent(Component* component_);
+	void RemoveComponent(int i_) { components->erase(components->begin() + i_); }
+	Component* GetComponent(int i_) { return &(components->at(i_)); }
 
 	void Update();
-	inline int getNumComponents() { return components->size(); }
+	int GetNumComponents() { return components->size(); }
 
 private:
 	std::vector<IOComponent>* components;

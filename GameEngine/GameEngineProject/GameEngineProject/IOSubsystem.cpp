@@ -1,49 +1,28 @@
-#include "GraphicsSubsystem.h"
+#include "IOSubsystem.h"
 #include "EventQueue.h"
 
-
-Component* GraphicsSubsystem::AddComponent(Component* component_)
+Component* IOSubsystem::AddComponent(Component* component_)
 {
-	if (component_->GetType() == ComponentType::BoxShape2D)
+	if (component_->GetType() == ComponentType::IO)
 	{
-		BoxShape2D* temp = static_cast<BoxShape2D*>(component_);
+		IOComponent* temp = static_cast<IOComponent*>(component_);
 		components->push_back(*temp);
 		return &(components->back());
 	}
 	else
 	{
-		std::cout << "Tried to push a non-boxShape2D component to the graphics subsystem" << std::endl;
+		std::cout << "Tried to push a non-IO component to the IO subsystem" << std::endl;
 		return nullptr;
 	}
 }
 
-void GraphicsSubsystem::Update()
-{
-	sf::Event e;
-
-	window->pollEvent(e);
-
-	if (e.type == sf::Event::Closed) {
-		window->close();
-
-	}
-	if (e.type == sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+void IOSubsystem::Update()
+{	
+	// update components bellonging to physics subsystem
+	for (int i = 0; i < components->size(); i++)
 	{
-		window->close();
+		components->at(i).Update();
 	}
-	Render();
-}
-                     
-void GraphicsSubsystem::Render()
-{
-	window->clear(sf::Color::Cyan);	
-
-	//go through all graphics components and update them
-	for (auto component : *components) {
-
-		component.Update();
-	}
-	window->display();
 
 	int eQsize = eventQueue->events.size();
 
@@ -94,9 +73,4 @@ void GraphicsSubsystem::Render()
 			}
 		}
 	}
-	
-
-	
-	
 }
-

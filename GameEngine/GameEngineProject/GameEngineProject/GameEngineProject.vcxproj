@@ -164,6 +164,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicsSubsystem.cpp" />
     <ClCompile Include="IOComponent.cpp" />
+    <ClCompile Include="IOSubsystem.cpp" />
     <ClCompile Include="PhysicsSubsystem.cpp" />
   </ItemGroup>
   <ItemGroup>

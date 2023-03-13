@@ -20,12 +20,14 @@ void IOComponent::Update()
 	std::vector<GameObject*> objects;
 	std::vector<SubsystemType> systems;
 	Event* event = new Event();
-
+	int i;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		objects.push_back(mySystem->GetGameObjects()->at(0));
-
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		{
+			objects.push_back(mySystem->GetGameObjects()->at(i));
+		}
 		systems.push_back(SubsystemType::Physics);
 		event->assignObjects(objects);
 		event->assignSystems(systems);

@@ -4,22 +4,30 @@
 
 void PhysicsMoveUp(Event* event_)
 {
-	event_->objects[0]->GetPlayerShape()->move(0,1);
+	std::cout << "A move up event occurred! It was applied to entity \"" << event_->objects[0]->GetName() << "\"" << std::endl;
+	event_->objects[0]->transform.Translation(Vector2(0, 1));
+	//event_->objects[0]->GetPlayerShape()->move(0,1);
 }
 
 void PhysicsMoveDown(Event* event_)
 {
-	event_->objects[0]->GetPlayerShape()->move(0, -1);
+	std::cout << "A move down event occurred! It was applied to entity \"" << event_->objects[0]->GetName() << "\"" << std::endl;
+	event_->objects[0]->transform.Translation(Vector2(0, -1));
+	//event_->objects[0]->GetPlayerShape()->move(0, -1);
 }
 
 void PhysicsMoveLeft(Event* event_)
 {
-	event_->objects[0]->GetPlayerShape()->move(-1, 0);
+	std::cout << "A move left event occurred! It was applied to entity \"" << event_->objects[0]->GetName() << "\"" << std::endl;
+	event_->objects[0]->transform.Translation(Vector2(-1, 0));
+	//event_->objects[0]->GetPlayerShape()->move(-1, 0);
 }
 
 void PhysicsMoveRight(Event* event_)
 {
-	event_->objects[0]->GetPlayerShape()->move(1, 0);
+	std::cout << "A move right event occurred! It was applied to entity \"" << event_->objects[0]->GetName() << "\"" << std::endl;
+	event_->objects[0]->transform.Translation(Vector2(1, 0));
+	//event_->objects[0]->GetPlayerShape()->move(1, 0);
 }
 
 

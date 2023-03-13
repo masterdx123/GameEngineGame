@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "PhysicsSubsystem.h"
 #include "GraphicsSubsystem.h"
+#include "IOSubsystem.h"
 #include "EventQueue.h"
 
 GameEngine::GameEngine()
@@ -12,9 +13,11 @@ GameEngine::GameEngine()
 
 	PhysicsSubsystem* physicsSubsystem = new PhysicsSubsystem(eventQueue, gameObjects);
 	GraphicsSubsystem* graphicsSubsystem = new GraphicsSubsystem(eventQueue, gameObjects);
+	IOSubsystem* ioSubsystem = new IOSubsystem(eventQueue, gameObjects);
 
 	subsystems->push_back(physicsSubsystem);
 	subsystems->push_back(graphicsSubsystem);	
+	subsystems->push_back(ioSubsystem);
 
 	SetupGame();
 }
@@ -80,23 +83,21 @@ void GameEngine::SetupGame()
 	/*
 	
 	*/
-	sf::Texture objTexture;
-
-	if (!objTexture.loadFromFile("../Textures/catGame.jpg"))
-	{
-		std::cout << "Texture did not load!" << "\n";
-	}
-
-	GraphicsSubsystem* tempptr = static_cast<GraphicsSubsystem*>(subsystems->at(1));
-
-	//BoxColl2D boxColl(gameObjects->back(), subsystems->at(0));
-	BoxShape2D playerBoxShape(gameObjects->back(), subsystems->at(1), tempptr->GetWindow(), Vector2(400.0f, 200.0f), Vector2(50.0f, 50.0f), objTexture);
 	
-	//gameObjects->back()->AddComponent(subsystems->at(0)->AddComponent(&boxColl));
+
+	GraphicsSubsystem* tempptr = static_cast<GraphicsSubsystem*>(subsystems->at(1));	
+
+	BoxShape2D playerBoxShape(gameObjects->back(), subsystems->at(1), tempptr->GetWindow(), Vector2(400.0f, 200.0f), Vector2(50.0f, 50.0f), "../Textures/catGame.jpg");
+	IOComponent playerIO(gameObjects->back(), subsystems->at(2));
+	
 	gameObjects->back()->AddComponent(subsystems->at(1)->AddComponent(&playerBoxShape));
+	gameObjects->back()->AddComponent(subsystems->at(2)->AddComponent(&playerIO));
+	
 	
 
 	gameObjects->push_back(new GameObject("Enemy"));
-	BoxShape2D enemyBoxShape(gameObjects->back(), subsystems->at(1), tempptr->GetWindow(), Vector2(600.0f, 300.0f), Vector2(100.0f, 100.0f), objTexture);
+
+	BoxShape2D enemyBoxShape(gameObjects->back(), subsystems->at(1), tempptr->GetWindow(), Vector2(600.0f, 300.0f), Vector2(100.0f, 100.0f), "../Textures/keyboardcat.jpg");
+
 	gameObjects->back()->AddComponent(subsystems->at(1)->AddComponent(&enemyBoxShape));
 }

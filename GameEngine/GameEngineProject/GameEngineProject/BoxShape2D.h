@@ -2,26 +2,28 @@
 
 #include "Component.h"
 #include "SFML/Graphics.hpp"
+#include "GameObject.h"
 #include "Vector2.h"
 
-class GameObject;
 
 
 class BoxShape2D : public Component {
 public:
-	BoxShape2D(GameObject* myObject_, Subsystem* mySystem_, sf::RenderWindow* window_, Vector2 pos_, Vector2 size_, sf::Texture objTexture_) : Component(ComponentType::BoxShape2D, myObject_, mySystem_) {
+	BoxShape2D(GameObject* myObject_, Subsystem* mySystem_, sf::RenderWindow* window_, Vector2 pos_, Vector2 size_, std::string fileName_) : Component(ComponentType::BoxShape2D, myObject_, mySystem_) {
 		myShape = new sf::RectangleShape;
 		window = window_;		
 		sf::Vector2f temp(pos_.x, pos_.y);		
 		myShape->setSize(sf::Vector2f(size_.x, size_.y));
 		myShape->setPosition(temp);
+		objTexture = new sf::Texture;
 
-		//merda de linha n funciona a texturaporque mete a null
-		myShape->setTexture(&objTexture_);
+		if (!objTexture->loadFromFile(fileName_))
+		{
+			std::cout << "Texture did not load!" << "\n";
+		}
 
-		//cant get obj to receive shape because GameObject is undefined
-		myObject = myObject_;
-		myObject[0].SetPlayerShape(myShape);
+		//doesnt work
+		myShape->setTexture(objTexture);
 	};
 	BoxShape2D(const BoxShape2D& other) : Component(ComponentType::BoxShape2D, other.myObject, other.mySystem) {
 		myShape = new sf::RectangleShape;
@@ -31,10 +33,6 @@ public:
 
 		//merda de linha n funciona a texturaporque mete a null
 		myShape->setTexture(other.myShape->getTexture());
-
-		//cant get obj to receive shape because GameObject is undefined
-		myObject = other.myObject;
-		myObject->SetPlayerShape(myShape);
 	};
 
 	~BoxShape2D() { delete myShape; };
@@ -45,5 +43,6 @@ public:
 protected:
 	sf::RectangleShape* myShape;
 	sf::RenderWindow* window;	
-	GameObject* myObject;
+	sf::Texture* objTexture;
+
 };
