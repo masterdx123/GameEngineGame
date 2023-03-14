@@ -19,11 +19,13 @@ void IOComponent::Update()
 {
 	std::vector<GameObject*> objects;
 	std::vector<SubsystemType> systems;
-	Event* event = new Event();
+	//Event* event; //= new Event();
 	int i;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
+		Event* event = new Event();
+
 		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
 		{
 			objects.push_back(mySystem->GetGameObjects()->at(i));
@@ -37,7 +39,12 @@ void IOComponent::Update()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		objects.push_back(mySystem->GetGameObjects()->at(0));
+		Event* event = new Event();
+
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		{
+			objects.push_back(mySystem->GetGameObjects()->at(i));
+		}
 
 		systems.push_back(SubsystemType::Physics);
 		event->assignObjects(objects);
@@ -48,7 +55,12 @@ void IOComponent::Update()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		objects.push_back(mySystem->GetGameObjects()->at(0));
+		Event* event = new Event();
+
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		{
+			objects.push_back(mySystem->GetGameObjects()->at(i));
+		}
 
 		systems.push_back(SubsystemType::Physics);
 		event->assignObjects(objects);
@@ -59,7 +71,12 @@ void IOComponent::Update()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		objects.push_back(mySystem->GetGameObjects()->at(0));
+		Event* event = new Event();
+
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		{
+			objects.push_back(mySystem->GetGameObjects()->at(i));
+		}
 
 		systems.push_back(SubsystemType::Physics);
 		event->assignObjects(objects);

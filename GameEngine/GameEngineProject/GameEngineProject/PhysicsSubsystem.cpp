@@ -3,16 +3,12 @@
 
 Component* PhysicsSubsystem::AddComponent(Component* component_)
 {
-	if (component_->GetType() == ComponentType::BoxColl2D)
+	if (component_->GetType() == ComponentType::Physics)
 	{
-		BoxColl2D* temp = static_cast<BoxColl2D*>(component_);
-		components->push_back(temp);
-		return (components->back());
-	}
-	else if (component_->GetType() == ComponentType::CircleColl2D)
-	{
-		CircleColl2D* temp = static_cast<CircleColl2D*>(component_);
-		components->push_back(temp);
+		PhysicsComponent * temp = static_cast<PhysicsComponent*>(component_);
+		
+		PhysicsComponent* temp1 = new PhysicsComponent(*temp);
+		components->push_back(temp1);
 		return (components->back());
 	}
 	else
@@ -22,8 +18,26 @@ Component* PhysicsSubsystem::AddComponent(Component* component_)
 	}
 }
 
+void PhysicsSubsystem::SetWorld()
+{
+
+	b2Vec2 gravity(0.0f, 0.0f);
+	world = new b2World(gravity);
+
+}
+
+void PhysicsSubsystem::TimeUpdate()
+{
+	timeStep = 1.0f / 120.0f;
+	velocityIterations = 8;
+	positionIterations = 3;
+
+	//world->Step(timeStep, velocityIterations, positionIterations);
+}
+
 void PhysicsSubsystem::Update()
 {
+	world->Step(timeStep, velocityIterations, positionIterations);
 	// update components bellonging to physics subsystem
 	for (int i = 0; i < components->size(); i++)
 	{
@@ -80,3 +94,5 @@ void PhysicsSubsystem::Update()
 		}
 	}
 }
+
+

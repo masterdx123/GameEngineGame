@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "Common.h"
 #include "SFML/Graphics.hpp"
+#include <Box2D/Box2D.h>
 
 class GameObject {
 public:
@@ -25,8 +26,9 @@ public:
 	std::string GetName() { return *name; };
 	int GetObjectID() { return objectID; };
 	void SetName(std::string name_) { *name = name_; }
-	void SetPlayerShape(sf::RectangleShape* playerShape_) { playerShape = playerShape_; }
-	sf::RectangleShape* GetPlayerShape() { return playerShape; }
+
+	void SetPlayerBody(b2Body* playerBody_) { playerBody = playerBody_; }
+	b2Body* GetPlayerBody() { return playerBody; };
 
 	GameObject* AddChild(GameObject* child_);
 	GameObject* GetChild(int index_) const;
@@ -36,11 +38,19 @@ public:
 	void RemoveChild(GameObject* child_);
 	int GetChildCount() const; 	
 
+	inline void UpdatePosition(sf::Vector2f position_) { position = position_; }
+	inline sf::Vector2f GetPosition() { return position; }
+	inline b2Vec2 GetDir() { return direction; }
+	inline void SetDir(b2Vec2 direction_) { direction = direction_; }
+	inline void ResetDir() { direction.x = 0.0f; direction.y = 0.0f; }
+
 private:
 	int objectID;
 	std::string* name;
 	GameObject* parent;
 	std::vector<GameObject*> children;
 	std::unordered_map<ComponentType, Component*> components;
-	sf::RectangleShape* playerShape;
+	b2Body* playerBody;
+	sf::Vector2f position;
+	b2Vec2 direction;
 };

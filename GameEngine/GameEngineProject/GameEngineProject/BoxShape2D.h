@@ -15,6 +15,7 @@ public:
 		sf::Vector2f temp(pos_.x, pos_.y);		
 		myShape->setSize(sf::Vector2f(size_.x, size_.y));
 		myShape->setPosition(temp);
+
 		objTexture = new sf::Texture;
 
 		if (!objTexture->loadFromFile(fileName_))
@@ -22,16 +23,15 @@ public:
 			std::cout << "Texture did not load!" << "\n";
 		}
 
-		//doesnt work
 		myShape->setTexture(objTexture);
+
+		
 	};
 	BoxShape2D(const BoxShape2D& other) : Component(ComponentType::BoxShape2D, other.myObject, other.mySystem) {
 		myShape = new sf::RectangleShape;
 		window = other.window;
 		myShape->setSize(other.myShape->getSize());
 		myShape->setPosition(other.myShape->getPosition());
-
-		//merda de linha n funciona a texturaporque mete a null
 		myShape->setTexture(other.myShape->getTexture());
 	};
 

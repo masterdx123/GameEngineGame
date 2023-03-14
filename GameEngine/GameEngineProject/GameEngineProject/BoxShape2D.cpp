@@ -17,5 +17,6 @@ BoxShape2D& BoxShape2D::operator=(const BoxShape2D& other)
 // Update the shape of the object every frame and draw it
 void BoxShape2D::Update()
 {	
-	window->draw(*myShape);		
+	myShape->setPosition(myObject->GetPosition());
+	window->draw(*myShape);
 }

@@ -155,9 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoxColl2D.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="BoxShape2D.cpp" />
-    <ClCompile Include="CircleColl2D.cpp" />
     <ClCompile Include="EventQueue.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameEngineProject.cpp" />
@@ -170,9 +169,8 @@
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Behaviour.h" />
-    <ClInclude Include="BoxColl2D.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="BoxShape2D.h" />
-    <ClInclude Include="CircleColl2D.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventQueue.h" />

@@ -57,10 +57,7 @@
     <ClCompile Include="EventQueue.cpp">
       <Filter>Arquivos de Origem\Event</Filter>
     </ClCompile>
-    <ClCompile Include="CircleColl2D.cpp">
-      <Filter>Arquivos de Origem\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxColl2D.cpp">
+    <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Arquivos de Origem\Components</Filter>
     </ClCompile>
     <ClCompile Include="BoxShape2D.cpp">
@@ -86,10 +83,7 @@
     <ClInclude Include="Component.h">
       <Filter>Arquivos de Cabeçalho\Components</Filter>
     </ClInclude>
-    <ClInclude Include="BoxColl2D.h">
-      <Filter>Arquivos de Cabeçalho\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleColl2D.h">
+    <ClInclude Include="PhysicsComponent.h">
       <Filter>Arquivos de Cabeçalho\Components</Filter>
     </ClInclude>
     <ClInclude Include="BoxShape2D.h">

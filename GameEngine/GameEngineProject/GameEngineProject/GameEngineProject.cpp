@@ -75,7 +75,7 @@ public:
 void moveLeft(EventData* myPointer);
 void moveRight(EventData* myPointer);
 void moveUp(EventData* myPointer);
-void moveDown(EventData* myPointer);
+void moveDown(EventData* myPointer); 
 
 
 
@@ -84,7 +84,7 @@ void moveDown(EventData* myPointer);
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 800), "Game Window");
-    sf::Event event;
+    sf::Event event; 
 
 
 

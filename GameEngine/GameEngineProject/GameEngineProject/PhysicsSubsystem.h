@@ -1,14 +1,17 @@
 #pragma once
 #include "Common.h"
 #include "Subsystem.h"
-#include "BoxColl2D.h"
-#include "CircleColl2D.h" 
+#include "PhysicsComponent.h"
 
 
 class PhysicsSubsystem : public Subsystem {
 public:
 	PhysicsSubsystem(EventQueue* eventQueue_, std::vector<GameObject*>* gameObjects_) : Subsystem(SubsystemType::Physics, eventQueue_, gameObjects_) {
 		components = new std::vector<Component*>;
+		SetWorld();
+		TimeUpdate();
+		
+		
 	};
 	~PhysicsSubsystem();
 
@@ -17,7 +20,16 @@ public:
 	Component* GetComponent(int i_) { return (components->at(i_)); }
 
 	void Update();
+	void SetWorld();
+	void TimeUpdate();
+
+	b2World* GetWorld() { return world; }
+	
 	int GetNumComponents() { return components->size(); }
 private:
 	std::vector<Component*>* components;
+	b2World* world;
+	float timeStep;
+	int velocityIterations;
+	int positionIterations;
 };
