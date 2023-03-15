@@ -14,7 +14,7 @@ public:
 		window = window_;		
 		sf::Vector2f temp(pos_.x, pos_.y);		
 		myShape->setSize(sf::Vector2f(size_.x, size_.y));
-		myShape->setPosition(temp);
+		//myShape->setPosition(temp);
 
 		objTexture = new sf::Texture;
 
@@ -25,10 +25,15 @@ public:
 
 		myShape->setTexture(objTexture);
 
+		b2Position = new b2Vec2;
+		b2Position->Set(temp.x, temp.y);
+		myObject->SetBodyPos(b2Position);
 		
 	};
 	BoxShape2D(const BoxShape2D& other) : Component(ComponentType::BoxShape2D, other.myObject, other.mySystem) {
 		myShape = new sf::RectangleShape;
+		objTexture = new sf::Texture;
+		b2Position = new b2Vec2;
 		window = other.window;
 		myShape->setSize(other.myShape->getSize());
 		myShape->setPosition(other.myShape->getPosition());
@@ -44,5 +49,6 @@ protected:
 	sf::RectangleShape* myShape;
 	sf::RenderWindow* window;	
 	sf::Texture* objTexture;
+	b2Vec2* b2Position;
 
 };

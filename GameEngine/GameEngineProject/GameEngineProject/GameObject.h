@@ -27,9 +27,13 @@ public:
 	int GetObjectID() { return objectID; };
 	void SetName(std::string name_) { *name = name_; }
 
-	void SetPlayerBody(b2Body* playerBody_) { playerBody = playerBody_; }
-	b2Body* GetPlayerBody() { return playerBody; };
+	void SetBody(b2Body* playerBody_) { playerBody = playerBody_; }
+	b2Body* GetBody() { return playerBody; };
 
+	void SetBodyPos(b2Vec2* pos_);
+	std::vector<b2Vec2*> GetBodyPos() { return pos; };
+
+	
 	GameObject* AddChild(GameObject* child_);
 	GameObject* GetChild(int index_) const;
 	GameObject* Find(const std::string& name_) const;
@@ -53,4 +57,6 @@ private:
 	b2Body* playerBody;
 	sf::Vector2f position;
 	b2Vec2 direction;
+	std::vector<b2Vec2*> pos;
+	
 };

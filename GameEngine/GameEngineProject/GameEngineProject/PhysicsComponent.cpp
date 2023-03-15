@@ -18,50 +18,40 @@ PhysicsComponent& PhysicsComponent::operator=(const PhysicsComponent& other)
 
 void PhysicsComponent::SetCollisionShape()
 {
-	scalingFactor = 200.0f;
-	playerHalfWidth = 0.5f;
-
+	scalingFactor = 200.0f;	
 	
-	playerBox.SetAsBox(playerHalfWidth, playerHalfWidth);
+	
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position = *myObject->GetBodyPos().back();
 
-	CreateBodyDef();
-}
-
-void PhysicsComponent::CreateBodyDef()
-{
-	b2BodyDef playerBD;
-	playerBD.type = b2_dynamicBody;
-	playerBD.position.Set(3.5f, -0.5f);	 
+	playerBox.SetAsBox(HalfWidth, HalfWidth);
 
 	PhysicsSubsystem* temp = static_cast<PhysicsSubsystem*>(mySystem);
 
-	player = temp->GetWorld()->CreateBody(&playerBD);
+	body = temp->GetWorld()->CreateBody(&bodyDef);
 
-	myObject->SetPlayerBody(player);
+	myObject->SetBody(body);
 
-	SetFixture();
-}
-
-void PhysicsComponent::SetFixture()
-{
 	fixtureDef.shape = &playerBox;
 	fixtureDef.density = 0.3f;
 	fixtureDef.friction = 0.3f;
 
-	player->CreateFixture(&fixtureDef);
-
-	ChangeCoordinatesToGraphics();
+	body->CreateFixture(&fixtureDef);
+	
 }
+
 
 void PhysicsComponent::ChangeCoordinatesToGraphics()
 {
+	
 	sf::Vector2f playerGraphicsPosition;
-	b2Vec2 playerPhysicsPosition = player->GetPosition();
+	b2Vec2 playerPhysicsPosition = body->GetPosition();
 
-	playerGraphicsPosition.x = (playerPhysicsPosition.x - playerHalfWidth) * scalingFactor;
-	playerGraphicsPosition.y = (playerPhysicsPosition.y + playerHalfWidth) * scalingFactor * -1.0f;
+	playerGraphicsPosition.x = (playerPhysicsPosition.x - HalfWidth) * scalingFactor;
+	playerGraphicsPosition.y = (playerPhysicsPosition.y + HalfWidth) * scalingFactor * -1.0f;
 
 	myObject->UpdatePosition(playerGraphicsPosition);
+	
 
 }
 
@@ -69,20 +59,16 @@ void PhysicsComponent::ChangeCoordinatesToGraphics()
 
 void PhysicsComponent::Update()
 {
-	if (player != nullptr)
+	if (body != nullptr)
 	{
 		b2Vec2 dir = myObject->GetDir();
 		dir.Normalize();
 
 		dir *= speed;
 
-		player->SetLinearVelocity(dir);		
-
-		b2Vec2 temp = player->GetPosition();
-		//std::cout << "Position -- x: " << temp.x << "   y: " << temp.y << std::endl;
+		body->SetLinearVelocity(dir);		
+		 
 		ChangeCoordinatesToGraphics();
-
-
 	}
 	else
 	{

@@ -5,17 +5,19 @@
 
 class PhysicsComponent : public Component {
 public:
-	PhysicsComponent(GameObject* myObject_, Subsystem* mySystem_) : Component(ComponentType::Physics, myObject_, mySystem_) {	
-		SetCollisionShape();
+	PhysicsComponent(GameObject* myObject_, Subsystem* mySystem_, float HalfWidth_) : Component(ComponentType::Physics, myObject_, mySystem_) {
 		speed = 0.2f;
+		HalfWidth = HalfWidth_;
+		SetCollisionShape();
+		
 	};
 	PhysicsComponent(const PhysicsComponent& other) : Component(ComponentType::Physics, other.myObject, other.mySystem) {
-		player = other.player;
-		playerHalfWidth = other.playerHalfWidth;
+		body = other.body;
+		HalfWidth = other.HalfWidth;
 		scalingFactor = other.scalingFactor;
 		fixtureDef = other.fixtureDef;
-		playerBD = other.playerBD;
 		playerBox = other.playerBox;
+		bodyDef= other.bodyDef;
 		speed = other.speed;
 	
 	};
@@ -25,8 +27,6 @@ public:
 
 	
 	void SetCollisionShape();
-	void CreateBodyDef();
-	void SetFixture();
 	void ChangeCoordinatesToGraphics();
 
 	inline void SetSpeed(float speed_) { speed = speed_; }
@@ -35,14 +35,13 @@ public:
 
 	void Update();
 protected:
-	float playerHalfWidth;
+	float HalfWidth;
 	float scalingFactor;
-
 	b2FixtureDef fixtureDef;
-	b2BodyDef playerBD;
-	
 	b2PolygonShape playerBox;
-	b2Body* player;
+	b2Body* body;
+	b2BodyDef bodyDef;
+	
 
 	float speed;
 };

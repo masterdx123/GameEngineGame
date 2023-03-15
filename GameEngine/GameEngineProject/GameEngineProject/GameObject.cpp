@@ -60,6 +60,15 @@ Component* GameObject::GetComponent(ComponentType type_)
 	return it->second;
 }
 
+
+
+
+
+void GameObject::SetBodyPos(b2Vec2* pos_)
+{
+	pos.push_back(pos_);
+}
+
 GameObject* GameObject::AddChild(GameObject* child_)
 {
 	child_->SetParent(this);
