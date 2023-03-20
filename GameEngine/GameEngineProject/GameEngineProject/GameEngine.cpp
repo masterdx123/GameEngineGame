@@ -75,34 +75,6 @@ int GameEngine::Update()
 
 	eventQueue->eventsBuffer.clear();
 	
-	//int eventQueueSize = eventQueue->events.size();
-
-
-
-/*	std::vector<int> eventsToErase;
-
-	if (eventQueueSize > 0)
-	{
-		for (i = 0; i < eventQueueSize; i++)
-		{	
-			if (eventQueue->events[i]->systems.size() == 0)
-				eventsToErase.push_back(i);
-		}
-	}
-
-	for (i = 0; i < eventsToErase.size(); i++)
-	{
-		if (eventQueue->events[eventsToErase[i]] != nullptr)
-			delete eventQueue->events[eventsToErase[i]];
-	}
-
-	for (auto it = eventQueue->events.begin(); it != eventQueue->events.end(); ++it)
-	{
-		if (*it == nullptr)
-			eventQueue->events.erase(it);
-	}*/
-
-
 
 
 	// Run the game while graphics window is open

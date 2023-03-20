@@ -43,7 +43,7 @@ public:
 		myShape->setTexture(other.myShape->getTexture());
 	};
 
-	~BoxShape2D() {  }; // delete myShape;
+	~BoxShape2D() {  };
 
 	BoxShape2D& operator=(const BoxShape2D& other);
 

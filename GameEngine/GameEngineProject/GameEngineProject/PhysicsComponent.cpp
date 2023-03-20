@@ -23,6 +23,7 @@ void PhysicsComponent::SetCollisionShape()
 	
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position = *myObject->GetBodyPos().back();
+	bodyDef.fixedRotation = true;
 
 	playerBox.SetAsBox(HalfWidth, HalfWidth);
 
