@@ -10,6 +10,10 @@ public:
 
 	Event() { type = EventType::Unassigned; }
 
+	~Event() {
+		std::cout << "I'm an event and I'm being deleted!" << std::endl;
+	}
+
 	Event(const Event& other) : type(other.type), objects(other.objects), systems(other.systems) {};
 
 	Event& operator=(const Event& other) { if (this == &other) return *this; Event a(other.type, other.objects, other.systems); return a; };

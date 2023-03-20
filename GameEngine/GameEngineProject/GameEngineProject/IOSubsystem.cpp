@@ -54,10 +54,10 @@ void IOSubsystem::Update()
 
 					
 
-					if (temp->systems.size() == 0)
+					if (temp->systems.size() == 0 && eventQueue->events[i] != nullptr)
 					{
 						delete eventQueue->events[i];
-						eventQueue->events.erase(eventQueue->events.begin() + i);
+						//eventQueue->events.erase(eventQueue->events.begin() + i);
 					}
 				}
 			}

@@ -18,5 +18,6 @@ BoxShape2D& BoxShape2D::operator=(const BoxShape2D& other)
 void BoxShape2D::Update()
 {	
 	myShape->setPosition(myObject->GetPosition());
+	myShape->setOrigin(size.x/2,size.y/2);
 	window->draw(*myShape);
 }

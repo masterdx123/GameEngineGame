@@ -30,14 +30,16 @@ void PhysicsSubsystem::TimeUpdate()
 {
 	timeStep = 1.0f / 120.0f;
 	velocityIterations = 8;
-	positionIterations = 3;
-
-	//world->Step(timeStep, velocityIterations, positionIterations);
+	positionIterations = 3;	
 }
 
 void PhysicsSubsystem::Update()
 {
+	//update world
+
 	world->Step(timeStep, velocityIterations, positionIterations);
+
+
 	// update components bellonging to physics subsystem
 	for (int i = 0; i < components->size(); i++)
 	{
@@ -52,7 +54,7 @@ void PhysicsSubsystem::Update()
 
 		for (int i = 0; i < eQsize; i++)
 		{
-			/* If there's an event, we check it out, and see if it's
+			/* If there's an event, check it out, see if it's
 			 * something this subsystem cares about (== type).
 			 */
 
@@ -62,16 +64,16 @@ void PhysicsSubsystem::Update()
 			{
 				if (temp->systems[j] == type)
 				{
-					/* If we care about it, we know we'll have a function
-					 * to deal with it somewhere in the eventQueue.
+					/* If it cares about it, find the function 
+					 * that handles it in the eventQueue.
 					 */
 
 					auto it = eventQueue->functionMap.find(type);
 
 					auto it2 = it->second->find(temp->type);
 
-					/* We find our function and pass in the event as its
-					 * parameter. We then pop our subsystem off the event's
+					/* Find the function and pass in the event as its
+					 * parameter. Then pop our subsystem off the event's
 					 * subsystem list, so we don't react to it twice!
 					 */
 
@@ -84,11 +86,11 @@ void PhysicsSubsystem::Update()
 					 * memory.
 					 */
 
-					if (temp->systems.size() == 0)
+					if (temp->systems.size() == 0 && eventQueue->events[i] != nullptr)
 					{
 						delete eventQueue->events[i];
-						eventQueue->events.erase(eventQueue->events.begin() + i);
-					}
+						//eventQueue->events.erase(eventQueue->events.begin() + i);
+					} 
 				}
 			}
 		}

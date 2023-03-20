@@ -8,6 +8,8 @@ public:
 	~EventQueue() {};
 	std::vector<Event*> events;
 
+	std::vector<Event*> eventsBuffer;
+
 	void InitialiseFunctionMaps();
 	void deleteEvents(Event* event_);
 	
