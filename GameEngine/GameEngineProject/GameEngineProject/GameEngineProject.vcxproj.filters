@@ -69,6 +69,12 @@
     <ClCompile Include="IOSubsystem.cpp">
       <Filter>Arquivos de Origem\Subsystems</Filter>
     </ClCompile>
+    <ClCompile Include="AIComponent.cpp">
+      <Filter>Arquivos de Origem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AISubsystem.cpp">
+      <Filter>Arquivos de Origem\Subsystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsSubsystem.h">
@@ -120,6 +126,12 @@
       <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
     </ClInclude>
     <ClInclude Include="IOComponent.h">
+      <Filter>Arquivos de Cabeçalho\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AISubsystem.h">
+      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="AIComponent.h">
       <Filter>Arquivos de Cabeçalho\Components</Filter>
     </ClInclude>
   </ItemGroup>

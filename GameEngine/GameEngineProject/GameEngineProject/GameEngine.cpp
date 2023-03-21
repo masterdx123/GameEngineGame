@@ -3,6 +3,7 @@
 #include "PhysicsSubsystem.h"
 #include "GraphicsSubsystem.h"
 #include "IOSubsystem.h"
+#include "AISubsystem.h"
 #include "EventQueue.h"
 
 
@@ -16,11 +17,13 @@ GameEngine::GameEngine()
 	PhysicsSubsystem* physicsSubsystem = new PhysicsSubsystem(eventQueue, gameObjects);
 	GraphicsSubsystem* graphicsSubsystem = new GraphicsSubsystem(eventQueue, gameObjects);
 	IOSubsystem* ioSubsystem = new IOSubsystem(eventQueue, gameObjects);
+	AISubsystem* aiSubsystem = new AISubsystem(eventQueue, gameObjects);
 
 	// Push all systems into the Vector of subsystems
 	subsystems->push_back(graphicsSubsystem);
 	subsystems->push_back(physicsSubsystem);
 	subsystems->push_back(ioSubsystem);
+	subsystems->push_back(aiSubsystem);
 
 	SetupGame();
 }
@@ -82,7 +85,6 @@ int GameEngine::Update()
 
 	if (tempptr->GetWindow()->isOpen())
 	{
-		
 
 		return true;
 	}
@@ -106,12 +108,18 @@ void GameEngine::SetupGame()
 	gameObjects->back()->AddComponent(subsystems->at(2)->AddComponent(&playerIO));
 	
 	
+	
 	// Enemy Setup
 	gameObjects->push_back(new GameObject("Enemy"));
 
 	BoxShape2D enemyBoxShape(gameObjects->back(), subsystems->at(0), tempptr->GetWindow(), Vector2(2.5f, -1.0f), Vector2(100.0f, 100.0f), "../Textures/keyboardcat.jpg");
 	PhysicsComponent enemyPhysics(gameObjects->back(), subsystems->at(1),0.25f);
+	AIComponent enemyAI(gameObjects->back(), subsystems->at(3));
+
+	enemyAI.AddBehaviour(BehaviourType::Patrol, "Patrolling!");
+	enemyAI.AddBehaviour(BehaviourType::Hunt, "Hunting!");
 
 	gameObjects->back()->AddComponent(subsystems->at(0)->AddComponent(&enemyBoxShape));
 	gameObjects->back()->AddComponent(subsystems->at(1)->AddComponent(&enemyPhysics));
+	gameObjects->back()->AddComponent(subsystems->at(3)->AddComponent(&enemyAI));
 }

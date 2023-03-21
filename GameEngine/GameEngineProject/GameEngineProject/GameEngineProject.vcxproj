@@ -155,6 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIComponent.cpp" />
+    <ClCompile Include="AISubsystem.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="BoxShape2D.cpp" />
     <ClCompile Include="EventQueue.cpp" />
@@ -167,6 +169,8 @@
     <ClCompile Include="PhysicsSubsystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIComponent.h" />
+    <ClInclude Include="AISubsystem.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Behaviour.h" />
     <ClInclude Include="PhysicsComponent.h" />
