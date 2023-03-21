@@ -75,6 +75,9 @@
     <ClCompile Include="AISubsystem.cpp">
       <Filter>Arquivos de Origem\Subsystems</Filter>
     </ClCompile>
+    <ClCompile Include="Behaviour.cpp">
+      <Filter>Arquivos de Origem\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsSubsystem.h">

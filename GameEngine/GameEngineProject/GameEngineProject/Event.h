@@ -11,7 +11,7 @@ public:
 	Event() { type = EventType::Unassigned; }
 
 	~Event() {
-		std::cout << "I'm an event and I'm being deleted!" << std::endl;
+		
 	}
 
 	Event(const Event& other) : type(other.type), objects(other.objects), systems(other.systems) {};

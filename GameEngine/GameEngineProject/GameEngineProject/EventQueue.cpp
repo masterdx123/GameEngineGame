@@ -51,11 +51,9 @@ void AIMovement(Event* event_)
 
 		if (temp->GetName() != "Player")
 		{
-			b2Vec2 temp1 = temp->GetDir();
-			temp->SetDir(temp1);
 			Component* ptr = temp->GetComponent(ComponentType::AI);
 			AIComponent* tempAI = static_cast<AIComponent*>(ptr);
-			tempAI->SetInRange(true);
+			tempAI->SetInRange(false);
 		}
 		
 	}
@@ -77,7 +75,7 @@ void EventQueue::InitialiseFunctionMaps()
 
 	std::unordered_map<EventType, void(*)(Event*)>* aiMap = new std::unordered_map<EventType, void(*)(Event*)>;
 
-	aiMap->insert({ EventType::MoveUp, &AIMovement });
+	aiMap->insert({ EventType::Movement, &AIMovement });
 
 	functionMaps.push_back(aiMap);
 	functionMap.insert({ SubsystemType::AI, aiMap });

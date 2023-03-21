@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AISubsystem.cpp" />
+    <ClCompile Include="Behaviour.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="BoxShape2D.cpp" />
     <ClCompile Include="EventQueue.cpp" />
