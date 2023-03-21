@@ -5,8 +5,10 @@
 #include "EventQueue.h"
 #include "AISubsystem.h"
 
+
 AIComponent::AIComponent(const AIComponent& other) : Component(other.type, other.myObject, other.mySystem)
 {
+	
 	behaviours = new std::vector<Behaviour*>;
 
 	for (int i = 0; i < other.behaviours->size(); i++)
@@ -21,6 +23,8 @@ AIComponent::AIComponent(const AIComponent& other) : Component(other.type, other
 	dir = other.dir;
 	movingLeft = other.movingLeft;
 	speed = other.speed;
+	newWaypoint = other.newWaypoint;
+	waypoints = other.waypoints;
 }
 
 AIComponent& AIComponent::operator=(const AIComponent& other)
@@ -36,6 +40,8 @@ AIComponent& AIComponent::operator=(const AIComponent& other)
 
 void AIComponent::Update()
 {
+	myObject->GetBody()->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
 	std::vector<GameObject*> objects;
 	std::vector<SubsystemType> systems;
 	Event* event = new Event();
@@ -63,21 +69,24 @@ void AIComponent::Update()
 		std::cout << "patrolling" << std::endl;
 		std::unordered_map<BehaviourType, Behaviour*>::const_iterator it = behaviourMap.find(BehaviourType::Patrol);
 
-		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		
+		if (myObject->GetBody()->GetPosition().x > (GoToNextWaypoint().x - 0.1) && myObject->GetBody()->GetPosition().x < (GoToNextWaypoint().x + 0.1)
+			&& myObject->GetBody()->GetPosition().y >(GoToNextWaypoint().y - 0.1) && myObject->GetBody()->GetPosition().y < (GoToNextWaypoint().y + 0.1))
 		{
-			objects.push_back(mySystem->GetGameObjects()->at(i));
+
+			if (newWaypoint + 1 < waypoints.size())
+			{
+				newWaypoint++;
+			}
+			else
+			{
+				newWaypoint = 0;
+			}
 		}
-		systems.push_back(SubsystemType::AI);
-		event->assignObjects(objects);
-		event->assignSystems(systems);
-		event->assignType(EventType::Movement);
-		mySystem->GetEventQueue()->events.push_back(event);
-		
-		
 		
 
-		ChangeCoordinatesToGraphics();
-
+		myObject->GetBody()->SetLinearVelocity(speed * (b2Vec2(GoToNextWaypoint().x, GoToNextWaypoint().y)
+			- b2Vec2(myObject->GetBody()->GetPosition().x, myObject->GetBody()->GetPosition().y)));		
 		
 	}
 }
@@ -98,46 +107,4 @@ void AIComponent::SetPatrol()
 			currentBehaviour = behaviours->at(i);
 		}
 	}
-}
-
-void AIComponent::ChangeCoordinatesToGraphics()
-{
-
-	myObject->GetBody()->SetLinearVelocity(b2Vec2((myObject->GetBody()->GetLinearVelocity().x + speed)*dir, (myObject->GetBody()->GetLinearVelocity().y + speed)*dir));
-
-	std::cout << ""<< myObject->GetBody()->GetPosition().x << std::endl;
-	std::cout << "" << myObject->GetBody()->GetPosition().y << std::endl;
-
-	if (movingLeft == true)
-	{
-		if (dir == -1 && count >= 3)
-		{
-			dir = -dir;
-			count = 0;
-			movingLeft = false;
-		}
-		if (dir == -1)
-		{
-			count++;
-		}
-	}
-	else if (movingLeft==false)
-	{
-		if (dir == 1 && count >= 3)
-		{
-			dir = -dir;
-			count = 0;
-			movingLeft = true;
-		}
-		if (dir == 1)
-		{
-			count++;
-		}
-	}
-
-	myObject->UpdatePosition(myObject->GetPosition());
-
-	
-	
-	
 }

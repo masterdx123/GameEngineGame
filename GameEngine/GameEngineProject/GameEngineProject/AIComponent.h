@@ -5,19 +5,26 @@
 #include "Component.h"
 #include "Behaviour.h"
 #include <Box2D/Box2D.h>
+#include "Vector2.h"
 
 
 class AIComponent : public Component
 {
 public:
-	AIComponent(GameObject* myObject_, Subsystem* mySystem_, Vector2 waypoint_) : Component(ComponentType::AI, myObject_, mySystem_)
-	{
+	AIComponent(GameObject* myObject_, Subsystem* mySystem_, std::vector<Vector2> waypoint_) : Component(ComponentType::AI, myObject_, mySystem_), waypoints(waypoint_)
+	{		
+		
 		currentBehaviour = nullptr; behaviours = new std::vector<Behaviour*>; inRange = false;
 		count = 0;
-		dir = -1;
+		dir = -1.0f;
 		movingLeft = true;
-		speed = 2.0f;
-		waypoints.push_back(waypoint_);
+		speed = 0.05f;
+
+		if (waypoints.size() == 0)
+		{
+			waypoints = { Vector2(0.0f,0.0f) };
+		}
+		newWaypoint = 0;
 	};
 
 	AIComponent(const AIComponent& other);
@@ -34,7 +41,7 @@ public:
 	inline int GetBehaviourCount() { if (behaviours != nullptr) return behaviours->size(); return -1; }
 
 	void SetPatrol();
-	void ChangeCoordinatesToGraphics();
+	Vector2 GoToNextWaypoint() { return waypoints[newWaypoint]; }
 
 	void Update();
 
@@ -47,7 +54,8 @@ private:
 	bool inRange;
 	bool movingLeft;
 	int count;
-	int dir;
+	float dir;
 	float speed;
 	std::vector<Vector2> waypoints;
+	int newWaypoint;
 };

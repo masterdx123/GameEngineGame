@@ -112,9 +112,11 @@ void GameEngine::SetupGame()
 	// Enemy Setup
 	gameObjects->push_back(new GameObject("Enemy"));
 
+	std::vector<Vector2> enemyWaypoints = { Vector2(1.0f, -1.0f), Vector2(3.0f,-1.0f) };
+
 	BoxShape2D enemyBoxShape(gameObjects->back(), subsystems->at(0), tempptr->GetWindow(), Vector2(2.5f, -1.0f), Vector2(100.0f, 100.0f), "../Textures/keyboardcat.jpg");
 	PhysicsComponent enemyPhysics(gameObjects->back(), subsystems->at(1),0.25f);
-	AIComponent enemyAI(gameObjects->back(), subsystems->at(3));
+	AIComponent enemyAI(gameObjects->back(), subsystems->at(3) ,enemyWaypoints);
 
 	enemyAI.AddBehaviour(BehaviourType::Patrol, "Patrolling!");
 	enemyAI.AddBehaviour(BehaviourType::Hunt, "Hunting!");

@@ -54,6 +54,8 @@ void AIMovement(Event* event_)
 			Component* ptr = temp->GetComponent(ComponentType::AI);
 			AIComponent* tempAI = static_cast<AIComponent*>(ptr);
 			tempAI->SetInRange(false);
+
+			//handle speed and change body pos here
 		}
 		
 	}
