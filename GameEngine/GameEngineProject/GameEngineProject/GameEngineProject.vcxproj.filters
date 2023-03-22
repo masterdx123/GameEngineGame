@@ -137,5 +137,8 @@
     <ClInclude Include="AIComponent.h">
       <Filter>Arquivos de Cabeçalho\Components</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkSubsystem.h">
+      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
