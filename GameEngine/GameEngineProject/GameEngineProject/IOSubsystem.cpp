@@ -18,7 +18,7 @@ Component* IOSubsystem::AddComponent(Component* component_)
 
 void IOSubsystem::Update()
 {	
-	// update components bellonging to physics subsystem
+	// update components bellonging to IO subsystem
 	for (int i = 0; i < components->size(); i++)
 	{
 		components->at(i).Update();

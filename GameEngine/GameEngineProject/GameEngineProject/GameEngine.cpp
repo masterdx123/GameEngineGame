@@ -4,11 +4,14 @@
 #include "GraphicsSubsystem.h"
 #include "IOSubsystem.h"
 #include "AISubsystem.h"
+#include "NetworkSubsystem.h"
 #include "EventQueue.h"
 
+NetworkComponent* temp;
 
 GameEngine::GameEngine()
 {
+
 	gameObjects = new std::vector<GameObject*>;
 	subsystems = new std::vector<Subsystem*>;
 	eventQueue = new EventQueue();
@@ -18,12 +21,14 @@ GameEngine::GameEngine()
 	GraphicsSubsystem* graphicsSubsystem = new GraphicsSubsystem(eventQueue, gameObjects);
 	IOSubsystem* ioSubsystem = new IOSubsystem(eventQueue, gameObjects);
 	AISubsystem* aiSubsystem = new AISubsystem(eventQueue, gameObjects);
+	NetworkSubsystem* netSubsystem = new NetworkSubsystem(eventQueue, gameObjects);
 
 	// Push all systems into the Vector of subsystems
 	subsystems->push_back(graphicsSubsystem);
 	subsystems->push_back(physicsSubsystem);
 	subsystems->push_back(ioSubsystem);
 	subsystems->push_back(aiSubsystem);
+	subsystems->push_back(netSubsystem);
 
 	SetupGame();
 }
@@ -83,8 +88,73 @@ int GameEngine::Update()
 	// Run the game while graphics window is open
 	GraphicsSubsystem* tempptr = static_cast<GraphicsSubsystem*>(subsystems->at(0));
 
+	
+
 	if (tempptr->GetWindow()->isOpen())
 	{
+		sf::Event e;
+
+		tempptr->GetWindow()->pollEvent(e);
+
+		if (e.type == sf::Event::Closed) {
+
+			if (temp->GetPeer() != NULL)
+			{
+				enet_peer_disconnect_now(temp->GetPeer(), 0);
+			}
+
+			tempptr->GetWindow()->close();
+
+		}
+		if (e.type == sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			tempptr->GetWindow()->close();
+		}
+
+		while (enet_host_service(temp->GetClient(), temp->GetEnetEvent(), 0) > 0)
+		{
+			switch (temp->GetEnetEvent()->type) {
+
+				
+
+			case ENET_EVENT_TYPE_RECEIVE:
+
+				memcpy(temp->GetPacketType(), temp->GetEnetEvent()->packet->data, sizeof(int));
+
+				if (*temp->GetPacketType() == 0)
+				{
+					std::cout << "Packet Received!\n";
+					memcpy(temp->GetClientData(), temp->GetEnetEvent()->packet->data, sizeof(ClientData));
+					*temp->GetClientIndex() = temp->GetClientData()->clientIndex;
+				}
+				else if (*temp->GetPacketType() == 1)
+				{
+					memcpy(temp->GetServerData(), temp->GetEnetEvent()->packet->data, sizeof(PhysicsData));
+					for (int i = 0; i < 2; i++)
+					{
+						if (i != *temp->GetClientIndex())
+						{
+							b2Vec2 enemyPos = b2Vec2(temp->GetServerData()->positions[i].x, temp->GetServerData()->positions[i].y);
+							gameObjects->at(1)->GetBody()->SetTransform(enemyPos, 0.0f);
+						}
+					}
+				}
+
+				break;
+				//cout << "Packet received!\n";
+				//memcpy(newPosition, enetEvent.packet->data, enetEvent.packet->dataLength);
+				//cout << newPosition->x << "," << newPosition->y << "\n";
+				//enemy.setPosition(sf::Vector2f(newPosition->x, newPosition->y));
+				//break;
+			}
+		}
+
+		temp->GetClientPacket()->clientIndex = *temp->GetClientIndex();
+		temp->GetClientPacket()->position.x = gameObjects->at(0)->GetBody()->GetPosition().x;
+		temp->GetClientPacket()->position.y = gameObjects->at(0)->GetBody()->GetPosition().y;
+
+		*temp->GetDataPacket() = *enet_packet_create(temp->GetClientPacket(), sizeof(ClientPacket), ENET_PACKET_FLAG_RELIABLE);
+		enet_peer_send(temp->GetPeer(), 0, temp->GetDataPacket());
 
 		return true;
 	}
@@ -106,6 +176,20 @@ void GameEngine::SetupGame()
 	gameObjects->back()->AddComponent(subsystems->at(0)->AddComponent(&playerBoxShape));
 	gameObjects->back()->AddComponent(subsystems->at(1)->AddComponent(&playerPhysics));	
 	gameObjects->back()->AddComponent(subsystems->at(2)->AddComponent(&playerIO));
+
+
+	// Player2 Setup
+	gameObjects->push_back(new GameObject("Player2"));
+
+	GraphicsSubsystem* tempptr2 = static_cast<GraphicsSubsystem*>(subsystems->at(0));
+
+	BoxShape2D player2BoxShape(gameObjects->back(), subsystems->at(0), tempptr2->GetWindow(), Vector2(1.5f, -2.0f), Vector2(50.0f, 50.0f), "../Textures/catGame.jpg");
+	PhysicsComponent player2Physics(gameObjects->back(), subsystems->at(1), 0.125f);
+	IOComponent player2IO(gameObjects->back(), subsystems->at(2));
+
+	gameObjects->back()->AddComponent(subsystems->at(0)->AddComponent(&player2BoxShape));
+	gameObjects->back()->AddComponent(subsystems->at(1)->AddComponent(&player2Physics));
+	gameObjects->back()->AddComponent(subsystems->at(2)->AddComponent(&player2IO));
 	
 	
 	

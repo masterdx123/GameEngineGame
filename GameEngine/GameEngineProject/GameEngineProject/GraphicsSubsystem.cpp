@@ -19,18 +19,6 @@ Component* GraphicsSubsystem::AddComponent(Component* component_)
 
 void GraphicsSubsystem::Update()
 {
-	sf::Event e;
-
-	window->pollEvent(e);
-
-	if (e.type == sf::Event::Closed) {
-		window->close();
-
-	}
-	if (e.type == sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-	{
-		window->close();
-	}
 	Render();
 }
                      

@@ -2,6 +2,11 @@
 
 class Vector2 {
 public:
+	Vector2() {
+		float x;
+		float y;
+	}
+
 	Vector2(float x_, float y_) : x(x_), y(y_) {}
 	float x;
 	float y;
