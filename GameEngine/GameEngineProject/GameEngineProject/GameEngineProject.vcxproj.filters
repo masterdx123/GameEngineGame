@@ -79,10 +79,10 @@
       <Filter>Arquivos de Origem\Misc</Filter>
     </ClCompile>
     <ClCompile Include="NetworkComponent.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Arquivos de Origem\Components</Filter>
     </ClCompile>
     <ClCompile Include="NetworkSubsystem.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Arquivos de Origem\Subsystems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
