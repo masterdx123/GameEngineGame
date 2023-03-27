@@ -43,6 +43,38 @@ void PhysicsMoveRight(Event* event_)
 	event_->objects[0]->SetDir(temp);
 }
 
+//void EnemyMoveUp(Event* event_) {
+//
+//	b2Vec2 temp = event_->objects[1]->GetDir();
+//	temp.y += 1.0f;
+//
+//
+//	event_->objects[1]->SetDir(temp);
+//}
+//void EnemyMoveDown(Event* event_) {
+//
+//	b2Vec2 temp = event_->objects[1]->GetDir();
+//	temp.y -= 1.0f;
+//
+//
+//	event_->objects[1]->SetDir(temp);
+//}
+//void EnemyMoveLeft(Event* event_) {
+//
+//	b2Vec2 temp = event_->objects[1]->GetDir();
+//	temp.y -= 1.0f;
+//
+//
+//	event_->objects[1]->SetDir(temp);
+//}
+//void EnemyMoveRight(Event* event_) {
+//	b2Vec2 temp = event_->objects[1]->GetDir();
+//	temp.y += 1.0f;
+//
+//
+//	event_->objects[1]->SetDir(temp);
+//}
+
 void AIMovement(Event* event_)
 {
 	for (int i = 0; i < event_->objects.size(); i++)
@@ -67,13 +99,23 @@ void EventQueue::InitialiseFunctionMaps()
 {
 	std::unordered_map<EventType, void(*)(Event*)>* movementMap = new std::unordered_map<EventType, void(*)(Event*)>;
 
-	movementMap->insert({ EventType::MoveUp, &PhysicsMoveUp });
+	movementMap->insert({ EventType::MoveUp, &PhysicsMoveUp }); 
 	movementMap->insert({ EventType::MoveLeft, &PhysicsMoveLeft });
 	movementMap->insert({ EventType::MoveDown, &PhysicsMoveDown });
 	movementMap->insert({ EventType::MoveRight, &PhysicsMoveRight });
 
 	functionMaps.push_back(movementMap);
 	functionMap.insert({ SubsystemType::Physics, movementMap });
+
+	/*std::unordered_map<EventType, void(*)(Event*)>* enemyMap = new std::unordered_map<EventType, void(*)(Event*)>;
+
+	enemyMap->insert({ EventType::MoveUp, &EnemyMoveUp });
+	enemyMap->insert({ EventType::MoveLeft, &EnemyMoveLeft });
+	enemyMap->insert({ EventType::MoveDown, &EnemyMoveDown });
+	enemyMap->insert({ EventType::MoveRight, &EnemyMoveRight });
+
+	functionMaps.push_back(enemyMap);
+	functionMap.insert({ SubsystemType::Physics, enemyMap });*/
 
 	std::unordered_map<EventType, void(*)(Event*)>* aiMap = new std::unordered_map<EventType, void(*)(Event*)>;
 

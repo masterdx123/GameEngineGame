@@ -85,5 +85,6 @@ void IOComponent::Update()
 		mySystem->GetEventQueue()->events.push_back(event);
 	}
 	
+	std::cout << mySystem->GetEventQueue()->events.size() << std::endl;
 	
 }

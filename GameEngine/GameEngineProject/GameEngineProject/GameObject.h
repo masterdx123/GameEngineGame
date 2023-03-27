@@ -1,10 +1,12 @@
 #pragma once
 
-#include "Component.h"
-#include "Transform.h"
+//#include "Component.h"
+//#include "Transform.h"
 #include "Common.h"
 #include "SFML/Graphics.hpp"
 #include <Box2D/Box2D.h>
+
+class Component;
 
 class GameObject {
 public:
@@ -15,7 +17,7 @@ public:
 	GameObject(std::string name_, std::unordered_map<ComponentType, Component*> components_);
 	~GameObject() {};
 
-	Transform transform;
+	//Transform transform;
 	bool isActive;
 
 	virtual void Update(float deltaTime);

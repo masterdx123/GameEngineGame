@@ -2,7 +2,7 @@
 
 #include "Component.h"
 #include <enet\enet.h>
-
+#include <Box2D/Box2D.h>
 
 struct PhysicsData {
 	int packetType = 1;
@@ -24,12 +24,8 @@ class NetworkComponent : public Component {
 public:
 	NetworkComponent(GameObject* myObject_, Subsystem* mySystem_) : Component(ComponentType::Network, myObject_, mySystem_) {
 		
-		
-		address = new ENetAddress;
-		client = new ENetHost;
-		peer = new ENetPeer;
-		enetEvent = new ENetEvent;
-
+		address = new ENetAddress();
+		enetEvent = new ENetEvent();
 		if (enet_initialize() != 0)
 		{
 			std::cout << "Enet failed to initialise!" << "\n\n";
@@ -59,9 +55,10 @@ public:
 		*packetType = -1;
 
 		clientPacket = new ClientPacket;
+		dataPacket = new ENetPacket;
 		
 
-		*clientIndex = -1;
+		clientIndex = -1;
 	};
 	NetworkComponent(const NetworkComponent& other) : Component(other) {
 		
@@ -69,21 +66,25 @@ public:
 		client = other.client;
 		peer = other.peer;
 		enetEvent = other.enetEvent;
-	
+		clientData = other.clientData;
+		clientIndex = other.clientIndex;
+		clientPacket = other.clientPacket;
+		dataPacket = other.dataPacket;
+		packetType = other.packetType;
+		serverData = other.serverData;	
+	};
+	~NetworkComponent() {
+
+		if (peer != NULL)
+		{
+			enet_peer_disconnect_now(peer, 0);
+		}
 	};
 
 	NetworkComponent& operator=(const NetworkComponent& other);
-
-	ENetPeer* GetPeer() { return peer; }
-	ENetHost* GetClient() { return client; }
-	ENetEvent* GetEnetEvent() { return enetEvent; }
-	int* GetPacketType() { return packetType; }
-	ClientData* GetClientData() { return clientData; }
-	PhysicsData* GetServerData() { return serverData; }
-	int* GetClientIndex() { return clientIndex; }
-	ClientPacket* GetClientPacket() { return clientPacket; }
-	ENetPacket* GetDataPacket() { return dataPacket; }
-
+	ENetPeer* GetPeer() { return peer; }	
+	
+	b2Vec2 position;
 
 	void Update();
 
@@ -94,8 +95,8 @@ private:
 	ENetEvent* enetEvent;
 	ClientData* clientData;
 	PhysicsData* serverData;
-	ClientPacket* clientPacket;
+	ClientPacket* clientPacket;	
 	ENetPacket* dataPacket;
 	int* packetType;
-	int* clientIndex;
+	int clientIndex;	
 };

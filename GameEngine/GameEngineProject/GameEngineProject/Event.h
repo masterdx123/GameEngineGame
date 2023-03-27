@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common.h"
+#include <Box2D/Box2D.h>
 
 class GameObject;
 
@@ -25,4 +26,6 @@ public:
 	EventType type;
 	std::vector<GameObject*> objects;
 	std::vector<SubsystemType> systems;
+
+	b2Vec2 positionData = b2Vec2(0.f, 0.f);
 };

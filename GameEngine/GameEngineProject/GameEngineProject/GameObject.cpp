@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "Component.h"
 
 int GameObject::objectCount = 0;
 
@@ -52,11 +53,15 @@ void GameObject::Render()
 void GameObject::AddComponent(Component* component_)
 {	
 	components.insert({ component_->GetType(), component_ });
-};
+}
 
 Component* GameObject::GetComponent(ComponentType type_)
 {
 	auto it = components.find(type_);
+	if (it == components.end())
+	{
+		return nullptr;
+	}
 	return it->second;
 }
 
@@ -106,7 +111,7 @@ GameObject* GameObject::GetParent() const
 void GameObject::SetParent(GameObject* parent_)
 {
 	this->parent = parent_;
-	transform.SetParent(&parent->transform);
+	//transform.SetParent(&parent->transform);
 	parent->children.push_back(this);
 }
 
@@ -115,7 +120,7 @@ void GameObject::RemoveChild(GameObject* child_)
 	auto it = std::find(children.begin(), children.end(), child_);
 	if (it != children.end())
 	{
-		child_->transform.SetParent(nullptr);
+		//child_->transform.SetParent(nullptr);
 		children.erase(it);
 	}
 }
