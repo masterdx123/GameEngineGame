@@ -96,12 +96,7 @@ void AIComponent::Update()
 
 
 		}
-	}
-
-	if (myObject->GetName() == "Bullet")
-		std::cout << myObject->GetBody()->GetPosition().x << " : " << myObject->GetBody()->GetPosition().y << std::endl;
-
-	
+	}	
 	
 	if (myObject->GetName() == "Bullet" && isShot)
 	{

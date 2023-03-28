@@ -44,6 +44,22 @@ void PhysicsMoveRight(Event* event_)
 	event_->objects[0]->SetDir(temp);
 }
 
+void PhysicsMovePlayer2(Event* event_) {
+
+	for (int i = 0; i < event_->objects.size(); i++)
+	{
+		GameObject* temp = event_->objects[i];
+
+		if (temp->GetName() == "Player2")
+		{
+			b2Vec2 datapos = event_->positionData;
+
+			temp->GetBody()->SetTransform(datapos, 0);
+		}
+	}
+
+}
+
 
 void AIMovement(Event* event_)
 {
@@ -92,6 +108,7 @@ void EventQueue::InitialiseFunctionMaps()
 	movementMap->insert({ EventType::MoveLeft, &PhysicsMoveLeft });
 	movementMap->insert({ EventType::MoveDown, &PhysicsMoveDown });
 	movementMap->insert({ EventType::MoveRight, &PhysicsMoveRight });
+	movementMap->insert({ EventType::SetPosition, &PhysicsMovePlayer2 });
 
 	functionMaps.push_back(movementMap);
 	functionMap.insert({ SubsystemType::Physics, movementMap });
