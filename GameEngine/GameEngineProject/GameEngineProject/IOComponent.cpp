@@ -85,7 +85,7 @@ void IOComponent::Update()
 		mySystem->GetEventQueue()->events.push_back(event);
 	}
 	
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	/*if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		Event* event = new Event();
 
@@ -98,7 +98,7 @@ void IOComponent::Update()
 		event->assignSystems(systems);
 		event->assignType(EventType::Shot);
 		mySystem->GetEventQueue()->events.push_back(event);
-	}
+	}*/
 
 	
 }
