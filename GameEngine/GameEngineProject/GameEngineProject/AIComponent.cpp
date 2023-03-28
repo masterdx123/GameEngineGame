@@ -6,6 +6,7 @@
 #include "AISubsystem.h"
 
 
+
 AIComponent::AIComponent(const AIComponent& other) : Component(other.type, other.myObject, other.mySystem)
 {
 	
@@ -15,6 +16,8 @@ AIComponent::AIComponent(const AIComponent& other) : Component(other.type, other
 	{
 		behaviours->push_back(other.behaviours->at(i));
 	}
+
+	isShot = other.isShot;
 
 	inRange = other.inRange;
 	behaviourMap = other.behaviourMap;
@@ -40,55 +43,74 @@ AIComponent& AIComponent::operator=(const AIComponent& other)
 
 void AIComponent::Update()
 {
-	myObject->GetBody()->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 
 	std::vector<GameObject*> objects;
 	std::vector<SubsystemType> systems;
 	Event* event = new Event();
 	int i;
 	
-
-	if (inRange)
+	if (myObject->GetName() == "Enemy")
 	{
-		std::unordered_map<BehaviourType, Behaviour*>::const_iterator it = behaviourMap.find(BehaviourType::Hunt);
-
-		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		if (inRange)
 		{
-			objects.push_back(mySystem->GetGameObjects()->at(i));
+			std::unordered_map<BehaviourType, Behaviour*>::const_iterator it = behaviourMap.find(BehaviourType::Hunt);
+
+			for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+			{
+				objects.push_back(mySystem->GetGameObjects()->at(i));
+			}
+			systems.push_back(SubsystemType::AI);
+			event->assignObjects(objects);
+			event->assignSystems(systems);
+			event->assignType(EventType::Movement);
+			mySystem->GetEventQueue()->events.push_back(event);
+
+			std::cout << "in range" << std::endl;
 		}
-		systems.push_back(SubsystemType::AI);
-		event->assignObjects(objects);
-		event->assignSystems(systems);
-		event->assignType(EventType::Movement);
-		mySystem->GetEventQueue()->events.push_back(event);
-
-		std::cout << "in range" << std::endl;
-	}
-	else
-	{
-		std::cout << "patrolling" << std::endl;
-		std::unordered_map<BehaviourType, Behaviour*>::const_iterator it = behaviourMap.find(BehaviourType::Patrol);
-
-		
-		if (myObject->GetBody()->GetPosition().x > (GoToNextWaypoint().x - 0.1) && myObject->GetBody()->GetPosition().x < (GoToNextWaypoint().x + 0.1)
-			&& myObject->GetBody()->GetPosition().y >(GoToNextWaypoint().y - 0.1) && myObject->GetBody()->GetPosition().y < (GoToNextWaypoint().y + 0.1))
+		else
 		{
 
-			if (newWaypoint + 1 < waypoints.size())
+
+			//std::cout << "patrolling" << std::endl;
+			std::unordered_map<BehaviourType, Behaviour*>::const_iterator it = behaviourMap.find(BehaviourType::Patrol);
+
+
+			if (myObject->GetBody()->GetPosition().x > (GoToNextWaypoint().x - 0.1) && myObject->GetBody()->GetPosition().x < (GoToNextWaypoint().x + 0.1)
+				&& myObject->GetBody()->GetPosition().y >(GoToNextWaypoint().y - 0.1) && myObject->GetBody()->GetPosition().y < (GoToNextWaypoint().y + 0.1))
 			{
-				newWaypoint++;
+
+				if (newWaypoint + 1 < waypoints.size())
+				{
+					newWaypoint++;
+				}
+				else
+				{
+					newWaypoint = 0;
+				}
 			}
-			else
-			{
-				newWaypoint = 0;
-			}
+
+
+			myObject->GetBody()->SetLinearVelocity(speed * (b2Vec2(GoToNextWaypoint().x, GoToNextWaypoint().y)
+				- b2Vec2(myObject->GetBody()->GetPosition().x, myObject->GetBody()->GetPosition().y)));
+
+
+
 		}
+	}
+
+	if (myObject->GetName() == "Bullet")
+		std::cout << myObject->GetBody()->GetPosition().x << " : " << myObject->GetBody()->GetPosition().y << std::endl;
+
+	
+	
+	if (myObject->GetName() == "Bullet" && isShot)
+	{
+		myObject->GetBody()->SetLinearVelocity(shotDirection);			
+	}
 		
 
-		myObject->GetBody()->SetLinearVelocity(speed * (b2Vec2(GoToNextWaypoint().x, GoToNextWaypoint().y)
-			- b2Vec2(myObject->GetBody()->GetPosition().x, myObject->GetBody()->GetPosition().y)));		
-		
-	}
+
+	
 }
 
 void AIComponent::AddBehaviour(BehaviourType type_, std::string myString_)

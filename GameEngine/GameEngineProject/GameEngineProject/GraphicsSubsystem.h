@@ -17,7 +17,7 @@ public:
 	Component* AddComponent(Component* component_);
 	void RemoveComponent(int i_) { components->erase(components->begin() + i_); }
 	Component* GetComponent(int i_) { return &(components->at(i_)); }
-	sf::RenderWindow* GetWindow() { return window; }
+	static sf::RenderWindow* GetWindow() { return window; }
 
 	void Update();
 	int GetNumComponents() { return components->size(); }
@@ -26,6 +26,6 @@ public:
 
 private:
 	std::vector<BoxShape2D>* components;
-	sf::RenderWindow* window;
+	static sf::RenderWindow* window;
 	
 };

@@ -1,6 +1,7 @@
 #include "EventQueue.h"
 #include "GameObject.h"
 #include "AIComponent.h"
+#include "BulletComponent.h"
 
 
 
@@ -43,37 +44,6 @@ void PhysicsMoveRight(Event* event_)
 	event_->objects[0]->SetDir(temp);
 }
 
-//void EnemyMoveUp(Event* event_) {
-//
-//	b2Vec2 temp = event_->objects[1]->GetDir();
-//	temp.y += 1.0f;
-//
-//
-//	event_->objects[1]->SetDir(temp);
-//}
-//void EnemyMoveDown(Event* event_) {
-//
-//	b2Vec2 temp = event_->objects[1]->GetDir();
-//	temp.y -= 1.0f;
-//
-//
-//	event_->objects[1]->SetDir(temp);
-//}
-//void EnemyMoveLeft(Event* event_) {
-//
-//	b2Vec2 temp = event_->objects[1]->GetDir();
-//	temp.y -= 1.0f;
-//
-//
-//	event_->objects[1]->SetDir(temp);
-//}
-//void EnemyMoveRight(Event* event_) {
-//	b2Vec2 temp = event_->objects[1]->GetDir();
-//	temp.y += 1.0f;
-//
-//
-//	event_->objects[1]->SetDir(temp);
-//}
 
 void AIMovement(Event* event_)
 {
@@ -81,7 +51,7 @@ void AIMovement(Event* event_)
 	{
 		GameObject* temp = event_->objects[i];
 
-		if (temp->GetName() != "Player")
+		if (temp->GetName() == "Enemy")
 		{
 			Component* ptr = temp->GetComponent(ComponentType::AI);
 			AIComponent* tempAI = static_cast<AIComponent*>(ptr);
@@ -93,6 +63,25 @@ void AIMovement(Event* event_)
 	}
 
 }
+
+void ShotEvent(Event* event_) {
+
+	for (int i = 0; i < event_->objects.size(); i++)
+	{
+		GameObject* temp = event_->objects[i];
+
+		if (temp->GetName() == "Bullet")
+		{
+			Component* ptr = temp->GetComponent(ComponentType::AI);
+			AIComponent* tempBullet = static_cast<AIComponent*>(ptr);
+			bool test1 = tempBullet->isShot;
+			tempBullet->SetIsShot(true);
+			tempBullet->SetShotDirection();
+		}
+	}
+}
+
+
 
 
 void EventQueue::InitialiseFunctionMaps()
@@ -107,19 +96,12 @@ void EventQueue::InitialiseFunctionMaps()
 	functionMaps.push_back(movementMap);
 	functionMap.insert({ SubsystemType::Physics, movementMap });
 
-	/*std::unordered_map<EventType, void(*)(Event*)>* enemyMap = new std::unordered_map<EventType, void(*)(Event*)>;
-
-	enemyMap->insert({ EventType::MoveUp, &EnemyMoveUp });
-	enemyMap->insert({ EventType::MoveLeft, &EnemyMoveLeft });
-	enemyMap->insert({ EventType::MoveDown, &EnemyMoveDown });
-	enemyMap->insert({ EventType::MoveRight, &EnemyMoveRight });
-
-	functionMaps.push_back(enemyMap);
-	functionMap.insert({ SubsystemType::Physics, enemyMap });*/
+	
 
 	std::unordered_map<EventType, void(*)(Event*)>* aiMap = new std::unordered_map<EventType, void(*)(Event*)>;
 
 	aiMap->insert({ EventType::Movement, &AIMovement });
+	aiMap->insert({ EventType::Shot, &ShotEvent });
 
 	functionMaps.push_back(aiMap);
 	functionMap.insert({ SubsystemType::AI, aiMap });

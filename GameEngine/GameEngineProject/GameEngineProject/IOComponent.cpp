@@ -85,6 +85,20 @@ void IOComponent::Update()
 		mySystem->GetEventQueue()->events.push_back(event);
 	}
 	
-	std::cout << mySystem->GetEventQueue()->events.size() << std::endl;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		Event* event = new Event();
+
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		{
+			objects.push_back(mySystem->GetGameObjects()->at(i));
+		}
+		systems.push_back(SubsystemType::AI);
+		event->assignObjects(objects);
+		event->assignSystems(systems);
+		event->assignType(EventType::Shot);
+		mySystem->GetEventQueue()->events.push_back(event);
+	}
+
 	
 }

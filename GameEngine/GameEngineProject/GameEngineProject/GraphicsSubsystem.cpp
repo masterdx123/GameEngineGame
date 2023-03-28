@@ -1,6 +1,7 @@
 #include "GraphicsSubsystem.h"
 #include "EventQueue.h"
 
+sf::RenderWindow* GraphicsSubsystem::window;
 
 Component* GraphicsSubsystem::AddComponent(Component* component_)
 {

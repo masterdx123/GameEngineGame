@@ -84,6 +84,9 @@
     <ClCompile Include="NetworkSubsystem.cpp">
       <Filter>Arquivos de Origem\Subsystems</Filter>
     </ClCompile>
+    <ClCompile Include="BulletComponent.cpp">
+      <Filter>Arquivos de Origem\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsSubsystem.h">
@@ -147,6 +150,9 @@
       <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
     </ClInclude>
     <ClInclude Include="NetworkComponent.h">
+      <Filter>Arquivos de Cabeçalho\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletComponent.h">
       <Filter>Arquivos de Cabeçalho\Components</Filter>
     </ClInclude>
   </ItemGroup>

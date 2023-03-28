@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "Behaviour.h"
 #include <Box2D/Box2D.h>
+#include "GraphicsSubsystem.h"
 #include "Vector2.h"
 
 
@@ -13,7 +14,7 @@ public:
 	AIComponent(GameObject* myObject_, Subsystem* mySystem_, std::vector<Vector2> waypoint_) : Component(ComponentType::AI, myObject_, mySystem_), waypoints(waypoint_)
 	{		
 		
-		currentBehaviour = nullptr; behaviours = new std::vector<Behaviour*>; inRange = false;
+		currentBehaviour = nullptr; behaviours = new std::vector<Behaviour*>; inRange = false; isShot = false;
 		count = 0;
 		dir = -1.0f;
 		movingLeft = true;
@@ -44,8 +45,29 @@ public:
 
 	void Update();
 
+	inline void SetIsShot(bool isShot_) { isShot = isShot_; }
+	inline void SetShotDirection()
+	{
+		if (hasBeenShot)
+			return;
+
+		hasBeenShot = true;
+
+		b2Vec2 dir;
+		float speed = 1;
+
+		sf::Vector2i mousePos = sf::Mouse::getPosition(*GraphicsSubsystem::GetWindow());
+
+		dir.x = mousePos.x - myObject->GetPosition().x;
+		dir.y = (mousePos.y - myObject->GetPosition().y) * -1.0f;
+
+		dir.Normalize();
+		dir *= speed;
+		shotDirection = dir;
+	}
 	inline void SetInRange(bool inRange_) { inRange = inRange_; }
 
+	bool isShot;
 private:
 	std::vector<Behaviour*>* behaviours;
 	std::unordered_map<BehaviourType, Behaviour*> behaviourMap;
@@ -57,4 +79,7 @@ private:
 	float speed;
 	std::vector<Vector2> waypoints;
 	int newWaypoint;
+	bool hasBeenShot = false;
+	b2Vec2 shotDirection = b2Vec2(0,0);
+	
 };

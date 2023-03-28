@@ -8,9 +8,18 @@ Component* AISubsystem::AddComponent(Component* component_)
 	if (component_->GetType() == ComponentType::AI)
 	{
 		AIComponent* temp = static_cast<AIComponent*>(component_);
-		components->push_back(*temp);
+		components->push_back(temp);
+		return (components->back());
+	}
+	/*
+	* else if (component_->GetType() == ComponentType::Bullet)
+	{
+		BulletComponent* temp = static_cast<BulletComponent*>(component_);
+		component->push_back(*temp);
 		return &(components->back());
 	}
+	*/
+	
 	else
 	{
 		std::cout << "Tried to push a non-AI component to the AI subsystem wot" << std::endl;
@@ -24,7 +33,7 @@ void AISubsystem::Update()
 	// update components bellonging to AI subsystem
 	for (int i = 0; i < components->size(); i++)
 	{
-		components->at(i).Update();
+		components->at(i)->Update();
 	}
 
 	int eQsize = eventQueue->events.size();
