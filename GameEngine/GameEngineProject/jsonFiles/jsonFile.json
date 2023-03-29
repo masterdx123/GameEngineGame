@@ -26,7 +26,7 @@
       "texture": "../Textures/enemycat.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
-      "IOComponent": true,
+      "IOComponent": false,
       "AIComponent": false,
       "NetComponent": true
     },
