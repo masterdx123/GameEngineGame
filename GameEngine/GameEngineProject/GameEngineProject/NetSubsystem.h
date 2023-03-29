@@ -1,14 +1,13 @@
 #pragma once
-
-#include "Common.h"
 #include "Subsystem.h"
-#include "NetworkComponent.h"
+#include "NetComponent.h"
 
-class NetworkSubsystem : public Subsystem
+
+class NetSubsystem : public Subsystem
 {
 public:
-	NetworkSubsystem(EventQueue* eQ_, std::vector<GameObject*>* gameObjects_) : Subsystem(SubsystemType::Network, eQ_, gameObjects_) {
-		components = new std::vector<NetworkComponent>;
+	NetSubsystem(EventQueue* eQ_, std::vector<GameObject*>* gameObjects_) : Subsystem(SubsystemType::Network, eQ_, gameObjects_) {
+		components = new std::vector<NetComponent>;
 	};
 
 	Component* AddComponent(Component* component_);
@@ -18,5 +17,5 @@ public:
 	void Update();
 	inline int GetNumComponents() { return components->size(); }
 private:
-	std::vector<NetworkComponent>* components;
+	std::vector<NetComponent>* components;
 };

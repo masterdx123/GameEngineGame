@@ -212,6 +212,7 @@ void moveDown(EventData* myPointer)
     }
 }
 */
+extern GameEngine* myGame = new GameEngine();
 
 int main() {
    /*
@@ -226,7 +227,6 @@ int main() {
 
 
 
-   GameEngine* myGame = new GameEngine();
    bool running = true;
 
    while (running)

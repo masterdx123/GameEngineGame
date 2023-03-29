@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -75,16 +75,16 @@
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)../Middleware\Box2D-2.3.0\Box2D;$(SolutionDir)../Middleware/enet-1.3.13/include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)../Middleware\Box2D-2.3.0\Box2D;$(SolutionDir)../Middleware/enet-1.3.13/include;$(SolutionDir)/Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)/lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>
     </LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>
-    </LibraryPath>
+    <LibraryPath>$(SolutionDir)/lib;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)../Middleware\Box2D-2.3.0\Box2D;$(SolutionDir)../Middleware/enet-1.3.13/include;$(SolutionDir)/Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -132,7 +132,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)/../Middleware/Box2D-2.3.0/Box2D/lib;$(SolutionDir)/../Middleware/enet-1.3.13;$(SolutionDir)/../Middleware/SFML-2.5.0/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;Box2D.lib;enet64.lib;winmm.lib;ws2_32.lib</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;Box2D.lib;jsoncpp.lib;enet64.lib;winmm.lib;ws2_32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,15 +151,15 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)/../Middleware/Box2D-2.3.0/Box2D/lib;$(SolutionDir)/../Middleware/SFML-2.5.0/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;Box2D.lib</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;Box2D.lib;jsoncpp.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AISubsystem.cpp" />
     <ClCompile Include="Behaviour.cpp" />
-    <ClCompile Include="NetworkComponent.cpp" />
-    <ClCompile Include="NetworkSubsystem.cpp" />
+    <ClCompile Include="NetComponent.cpp" />
+    <ClCompile Include="NetSubsystem.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="BoxShape2D.cpp" />
     <ClCompile Include="EventQueue.cpp" />
@@ -171,14 +171,15 @@
     <ClCompile Include="IOSubsystem.cpp" />
     <ClCompile Include="PhysicsSubsystem.cpp" />
     <ClCompile Include="BulletComponent.cpp" />
+    <ClCompile Include="UISubsystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIComponent.h" />
     <ClInclude Include="AISubsystem.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Behaviour.h" />
-    <ClInclude Include="NetworkComponent.h" />
-    <ClInclude Include="NetworkSubsystem.h" />
+    <ClInclude Include="NetComponent.h" />
+    <ClInclude Include="NetSubsystem.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="BoxShape2D.h" />
     <ClInclude Include="Component.h" />
@@ -191,6 +192,8 @@
     <ClInclude Include="IOComponent.h" />
     <ClInclude Include="IOSubsystem.h" />
     <ClInclude Include="Subsystem.h" />
+    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="UISubsystem.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="PhysicsSubsystem.h" />
     <ClInclude Include="Transform.h" />

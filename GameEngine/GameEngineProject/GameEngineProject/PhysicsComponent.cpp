@@ -2,7 +2,6 @@
 #include "SFML/Graphics.hpp"
 #include "GameObject.h"
 #include "PhysicsSubsystem.h"
-#include "NetworkComponent.h"
 
 
 PhysicsComponent& PhysicsComponent::operator=(const PhysicsComponent& other)
@@ -53,14 +52,6 @@ void PhysicsComponent::ChangeCoordinatesToGraphics()
 	playerGraphicsPosition.y = (playerPhysicsPosition.y + HalfWidth) * scalingFactor * -1.0f;
 
 	myObject->UpdatePosition(playerGraphicsPosition);
-	
-	auto it = myObject->GetComponent(ComponentType::Network);
-
-	if(it != nullptr)
-	{
-		NetworkComponent* temp = static_cast<NetworkComponent*>(it);
-		temp->position = playerPhysicsPosition;
-	}
 }
 
 

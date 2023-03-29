@@ -2,7 +2,9 @@
 
 #include "Component.h"
 #include <enet\enet.h>
-#include <Box2D/Box2D.h>
+#include "EventQueue.h"
+
+
 
 struct PhysicsData {
 	int packetType = 1;
@@ -19,18 +21,17 @@ struct ClientPacket {
 	Vector2 position;
 };
 
-
-class NetworkComponent : public Component {
+class NetComponent : public Component {
 public:
-	NetworkComponent(GameObject* myObject_, Subsystem* mySystem_) : Component(ComponentType::Network, myObject_, mySystem_) {
-		
+	NetComponent(GameObject* myObject_, Subsystem* mySystem_) : Component(ComponentType::Network, myObject_, mySystem_) {
+
 		address = new ENetAddress();
 		enetEvent = new ENetEvent();
 		if (enet_initialize() != 0)
 		{
 			std::cout << "Enet failed to initialise!" << "\n\n";
 		}
-		
+
 
 		client = enet_host_create(NULL, 1, 2, 0, 0);
 
@@ -56,12 +57,14 @@ public:
 
 		clientPacket = new ClientPacket;
 		dataPacket = new ENetPacket;
-		
+
 
 		clientIndex = -1;
+
+
 	};
-	NetworkComponent(const NetworkComponent& other) : Component(other) {
-		
+	NetComponent(const NetComponent& other) : Component(other) {
+
 		address = other.address;
 		client = other.client;
 		peer = other.peer;
@@ -71,9 +74,9 @@ public:
 		clientPacket = other.clientPacket;
 		dataPacket = other.dataPacket;
 		packetType = other.packetType;
-		serverData = other.serverData;	
+		serverData = other.serverData;
 	};
-	~NetworkComponent() {
+	~NetComponent() {
 
 		if (peer != NULL)
 		{
@@ -81,13 +84,11 @@ public:
 		}
 	};
 
-	NetworkComponent& operator=(const NetworkComponent& other);
-	ENetPeer* GetPeer() { return peer; }	
-	
-	b2Vec2 position;
+	NetComponent& operator=(const NetComponent& other);
 
 	void Update();
 
+	int clientIndex;
 private:
 	ENetAddress* address;
 	ENetHost* client;
@@ -95,8 +96,8 @@ private:
 	ENetEvent* enetEvent;
 	ClientData* clientData;
 	PhysicsData* serverData;
-	ClientPacket* clientPacket;	
+	ClientPacket* clientPacket;
 	ENetPacket* dataPacket;
 	int* packetType;
-	int clientIndex;	
+	
 };

@@ -10,5 +10,4 @@ public:
 	IOComponent& operator=(const IOComponent& other);
 
 	void Update();
-
 };

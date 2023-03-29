@@ -14,6 +14,7 @@ public:
 	AIComponent(GameObject* myObject_, Subsystem* mySystem_, std::vector<Vector2> waypoint_) : Component(ComponentType::AI, myObject_, mySystem_), waypoints(waypoint_)
 	{		
 		
+
 		currentBehaviour = nullptr; behaviours = new std::vector<Behaviour*>; inRange = false; isShot = false;
 		count = 0;
 		dir = -1.0f;
@@ -51,6 +52,7 @@ public:
 		if (hasBeenShot)
 			return;
 
+		
 		hasBeenShot = true;
 
 		b2Vec2 dir;
@@ -81,5 +83,7 @@ private:
 	int newWaypoint;
 	bool hasBeenShot = false;
 	b2Vec2 shotDirection = b2Vec2(0,0);
+
+	
 	
 };

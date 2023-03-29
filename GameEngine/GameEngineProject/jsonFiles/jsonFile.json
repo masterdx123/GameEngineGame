@@ -1,0 +1,60 @@
+{
+  "objects": [
+    {
+      "name": "Player",
+      "type": "objType",
+      "posX": 2.5,
+      "posY": -2.0,
+      "scaleX": 50.0,
+      "scaleY": 50.0,
+      "texture": "../Textures/catGame.jpg",
+      "PhysicsComponent": true,
+      "GraphicsComponent": true,
+      "IOComponent": true,
+      "AIComponent": true,
+      "NetComponent": true
+    },
+    {
+      "name": "Player2",
+      "type": "objType",
+      "posX": 1.5, 
+      "posY": -2.0,
+      "scaleX": 50.0,
+      "scaleY": 50.0,
+      "texture": "../Textures/enemycat.jpg",
+      "PhysicsComponent": true,
+      "GraphicsComponent": true,
+      "IOComponent": true,
+      "AIComponent": true,
+      "NetComponent": true
+    },
+    {
+      "name": "Bullet",
+      "type": "objType",
+      "posX": 2.5, 
+      "posY": -1.0,
+      "scaleX": 100.0,
+      "scaleY": 100.0,
+      "texture": "../Textures/catGame.jpg",
+      "PhysicsComponent": true,
+      "GraphicsComponent": true,
+      "IOComponent": true,
+      "AIComponent": true,
+      "NetComponent": true
+    },
+    {
+      "name": "Enemy",
+      "type": "objType",
+      "posX": 2.5,
+      "posY": -2.0,
+      "scaleX": 50.0,
+      "scaleY": 50.0,
+      "texture": "../Textures/keyboardcat.jpg",
+      "PhysicsComponent": true,
+      "GraphicsComponent": true,
+      "IOComponent": true,
+      "AIComponent": true,
+      "NetComponent": true
+    }
+  ]
+}

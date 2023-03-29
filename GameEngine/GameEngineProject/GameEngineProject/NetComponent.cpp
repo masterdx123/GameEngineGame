@@ -1,10 +1,7 @@
-#include "NetworkComponent.h"
-//#include "SFML/Graphics.hpp"
-//#include "GameObject.h"
-//#include "NetworkSubsystem.h"
-#include "EventQueue.h"
+#include "NetComponent.h"
 
-NetworkComponent& NetworkComponent::operator=(const NetworkComponent& other)
+
+NetComponent& NetComponent::operator=(const NetComponent& other)
 {
 	if (this == &other)
 	{
@@ -15,9 +12,9 @@ NetworkComponent& NetworkComponent::operator=(const NetworkComponent& other)
 	return *this;
 }
 
-void NetworkComponent::Update()
+void NetComponent::Update()
 {
-	
+
 
 	while (enet_host_service(client, enetEvent, 0) > 0)
 	{
@@ -47,7 +44,7 @@ void NetworkComponent::Update()
 				for (int i = 0; i < 2; i++)
 				{
 					if (i != clientIndex)
-					{						
+					{
 
 						event = new Event();
 						objects.push_back(myObject);
@@ -56,7 +53,7 @@ void NetworkComponent::Update()
 						event->assignSystems(systems);
 						event->type = EventType::SetPosition;
 						event->positionData = b2Vec2(serverData->positions[i].x, serverData->positions[i].y);
-							
+
 					}
 				}
 			}
@@ -64,14 +61,21 @@ void NetworkComponent::Update()
 			break;
 		}
 	}
-
+	
+	bool gotClient = false;
 	clientPacket->clientIndex = clientIndex;
-	clientPacket->position.x = position.x;
-	clientPacket->position.y = position.y;
+	if (myObject->GetName() == "Player")
+	{
+		if (gotClient == false) {
+			myObject->SetClientIndex(clientIndex);
+			gotClient = true;
+		}
+		
+		clientPacket->position.x = myObject->GetBody()->GetPosition().x;
+		clientPacket->position.y = myObject->GetBody()->GetPosition().y;
+	}
+	
 
 	dataPacket = enet_packet_create(clientPacket, sizeof(ClientPacket), ENET_PACKET_FLAG_RELIABLE);
 	enet_peer_send(peer, 0, dataPacket);
-
-	//enet_host_destroy(client);
-	//atexit(enet_deinitialize);
 }

@@ -1,11 +1,10 @@
-#include "NetworkSubsystem.h"
-#include "EventQueue.h"
+#include "NetSubsystem.h"
 
-Component* NetworkSubsystem::AddComponent(Component* component_)
+Component* NetSubsystem::AddComponent(Component* component_)
 {
 	if (component_->GetType() == ComponentType::Network)
 	{
-		NetworkComponent* temp = static_cast<NetworkComponent*>(component_);
+		NetComponent* temp = static_cast<NetComponent*>(component_);
 		components->push_back(*temp);
 		return &(components->back());
 	}
@@ -16,7 +15,7 @@ Component* NetworkSubsystem::AddComponent(Component* component_)
 	}
 }
 
-void NetworkSubsystem::Update()
+void NetSubsystem::Update()
 {
 	// update components bellonging to physics subsystem
 	for (int i = 0; i < components->size(); i++)

@@ -50,6 +50,9 @@ public:
 	inline void SetDir(b2Vec2 direction_) { direction = direction_; }
 	inline void ResetDir() { direction.x = 0.0f; direction.y = 0.0f; }
 
+	inline void SetClientIndex(int clientIndex_) { clientIndex = clientIndex_; }
+	inline int GetClientIndex() { return clientIndex; }
+
 private:
 	int objectID;
 	std::string* name;
@@ -60,5 +63,5 @@ private:
 	sf::Vector2f position;
 	b2Vec2 direction;
 	std::vector<b2Vec2*> pos;
-	
+	int clientIndex;
 };

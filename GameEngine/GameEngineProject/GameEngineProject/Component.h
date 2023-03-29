@@ -1,5 +1,6 @@
 #pragma once
 #include "Common.h"
+#include "GameObject.h"
 
 class GameObject;
 class Subsystem;
