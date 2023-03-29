@@ -17,8 +17,10 @@ public:
 	int Update();
 	void SetupGame();
 
-private:
 	std::vector<GameObject*>* gameObjects;
 	std::vector<Subsystem*>* subsystems;
+
+private:
+	
 	EventQueue* eventQueue;
 };

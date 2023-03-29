@@ -7,11 +7,12 @@
       "posY": -2.0,
       "scaleX": 50.0,
       "scaleY": 50.0,
+      "halfWidth": 0.125,
       "texture": "../Textures/catGame.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
       "IOComponent": true,
-      "AIComponent": true,
+      "AIComponent": false,
       "NetComponent": true
     },
     {
@@ -21,11 +22,12 @@
       "posY": -2.0,
       "scaleX": 50.0,
       "scaleY": 50.0,
+      "halfWidth": 0.125,
       "texture": "../Textures/enemycat.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
       "IOComponent": true,
-      "AIComponent": true,
+      "AIComponent": false,
       "NetComponent": true
     },
     {
@@ -35,12 +37,13 @@
       "posY": -1.0,
       "scaleX": 100.0,
       "scaleY": 100.0,
+      "halfWidth": 0.0625,
       "texture": "../Textures/catGame.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
-      "IOComponent": true,
+      "IOComponent": false,
       "AIComponent": true,
-      "NetComponent": true
+      "NetComponent": false
     },
     {
       "name": "Enemy",
@@ -49,12 +52,13 @@
       "posY": -2.0,
       "scaleX": 50.0,
       "scaleY": 50.0,
+      "halfWidth": 0.25,
       "texture": "../Textures/keyboardcat.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
-      "IOComponent": true,
+      "IOComponent": false,
       "AIComponent": true,
-      "NetComponent": true
+      "NetComponent": false
     }
   ]
 }

@@ -19,20 +19,25 @@ GameEngine::GameEngine()
 
 	// Create the game subsystems
 	PhysicsSubsystem* physicsSubsystem = new PhysicsSubsystem(eventQueue, gameObjects);
+	subsystems->push_back(physicsSubsystem);
 	GraphicsSubsystem* graphicsSubsystem = new GraphicsSubsystem(eventQueue, gameObjects);
+	subsystems->push_back(graphicsSubsystem);
 	IOSubsystem* ioSubsystem = new IOSubsystem(eventQueue, gameObjects);
+	subsystems->push_back(ioSubsystem);
 	AISubsystem* aiSubsystem = new AISubsystem(eventQueue, gameObjects);
+	subsystems->push_back(aiSubsystem);
 	NetSubsystem* netSubsystem = new NetSubsystem(eventQueue, gameObjects);
-	UISubsystem* uiSubsystem = new UISubsystem("../jsonFiles/jsonFile.json");
+	subsystems->push_back(netSubsystem);
+	UISubsystem* uiSubsystem = new UISubsystem("../jsonFiles/jsonFile.json", this);
 
 	// Push all systems into the Vector of subsystems
-	subsystems->push_back(graphicsSubsystem);
-	subsystems->push_back(physicsSubsystem);
-	subsystems->push_back(ioSubsystem);
-	subsystems->push_back(aiSubsystem);
-	subsystems->push_back(netSubsystem);
+	
+	
+	
+	
+	
 
-	SetupGame();
+
 }
 
 GameEngine::~GameEngine()
