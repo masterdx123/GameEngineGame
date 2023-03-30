@@ -98,9 +98,6 @@
     <ClInclude Include="PhysicsSubsystem.h">
       <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
     </ClInclude>
-    <ClInclude Include="AudioManager.h">
-      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Arquivos de Cabeçalho\Components</Filter>
     </ClInclude>
@@ -160,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="GameplayComponent.h">
       <Filter>Arquivos de Cabeçalho\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSubsystem.h">
+      <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

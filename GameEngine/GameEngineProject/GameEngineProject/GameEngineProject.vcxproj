@@ -176,7 +176,7 @@
   <ItemGroup>
     <ClInclude Include="GameplayComponent.h" />
     <ClInclude Include="GameplaySubsystem.h" />
-    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="AudioSubsystem.h" />
     <ClInclude Include="Behaviour.h" />
     <ClInclude Include="NetComponent.h" />
     <ClInclude Include="NetSubsystem.h" />

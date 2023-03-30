@@ -6,6 +6,7 @@
 #include "GameplaySubsystem.h"
 #include "NetSubsystem.h"
 #include "UISubsystem.h"
+#include "AudioSubsystem.h"
 #include "EventQueue.h"
 
 //NetworkComponent* temp;
