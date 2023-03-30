@@ -1,7 +1,6 @@
 #include "EventQueue.h"
 #include "GameObject.h"
 #include "GameplayComponent.h"
-#include "BulletComponent.h"
 
 
 //function to move an object upwards

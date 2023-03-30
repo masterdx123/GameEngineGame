@@ -11,8 +11,8 @@ class BoxShape2D : public Component {
 public:
 	BoxShape2D(GameObject* myObject_, Subsystem* mySystem_, sf::RenderWindow* window_, Vector2 pos_, Vector2 size_, std::string fileName_) : Component(ComponentType::BoxShape2D, myObject_, mySystem_) {
 		
-		//shape setup
 		
+		//shape setup		
 		myShape = new sf::RectangleShape;
 
 		window = window_;		
@@ -59,5 +59,6 @@ protected:
 	sf::Texture* objTexture;
 	b2Vec2* b2Position;
 	sf::Vector2f size;
-
+	sf::Text text;
+	sf::Font font;
 };
