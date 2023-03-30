@@ -17,7 +17,10 @@ BoxShape2D& BoxShape2D::operator=(const BoxShape2D& other)
 // Update the shape of the object every frame and draw it
 void BoxShape2D::Update()
 {	
-	
+
+	// This code allows for text to appear on the screen but it is currently too memory expensive so only uncomment it to check the functionality
+
+	/*
 	//get font
 
 	if (!font.loadFromFile("../Fonts/Raleway-Black.ttf")) {
@@ -30,6 +33,8 @@ void BoxShape2D::Update()
 	text.setPosition(50, 50);
 	text.setFillColor(sf::Color::White);
 	text.setString("Enemies found: 1");
+	
+	*/
 	
 	
 
