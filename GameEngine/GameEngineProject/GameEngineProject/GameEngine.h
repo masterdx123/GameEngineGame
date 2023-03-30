@@ -8,7 +8,6 @@ class Subsystem;
 class EventQueue;
 
 
-
 class GameEngine {
 public:
 	GameEngine();

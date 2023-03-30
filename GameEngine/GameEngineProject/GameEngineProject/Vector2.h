@@ -1,5 +1,6 @@
 #pragma once
 
+//Set Vector class with different operators
 class Vector2 {
 public:
 	Vector2() {

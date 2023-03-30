@@ -15,7 +15,7 @@ NetComponent& NetComponent::operator=(const NetComponent& other)
 void NetComponent::Update()
 {
 
-
+	//Continue to check for events
 	while (enet_host_service(client, enetEvent, 0) > 0)
 	{
 		std::vector<GameObject*> objects;
@@ -27,19 +27,21 @@ void NetComponent::Update()
 		switch (enetEvent->type) {
 
 
-
+		//receive server message
 		case ENET_EVENT_TYPE_RECEIVE:
 
 			memcpy(packetType, enetEvent->packet->data, sizeof(int));
 
 			if (*packetType == 0)
 			{
+				//client connected
 				std::cout << "Packet Received!\n";
 				memcpy(clientData, enetEvent->packet->data, sizeof(ClientData));
 				clientIndex = clientData->clientIndex;
 			}
 			else if (*packetType == 1)
 			{
+				//set positions based on server position and sent them as event
 				memcpy(serverData, enetEvent->packet->data, sizeof(PhysicsData));
 				for (int i = 0; i < 2; i++)
 				{
@@ -64,13 +66,14 @@ void NetComponent::Update()
 	
 	bool gotClient = false;
 	clientPacket->clientIndex = clientIndex;
+
 	if (myObject->GetName() == "Player")
 	{
 		if (gotClient == false) {
 			myObject->SetClientIndex(clientIndex);
 			gotClient = true;
 		}
-		
+		//client position receives player inputed postion
 		clientPacket->position.x = myObject->GetBody()->GetPosition().x;
 		clientPacket->position.y = myObject->GetBody()->GetPosition().y;
 

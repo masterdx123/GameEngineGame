@@ -10,6 +10,9 @@
 class BoxShape2D : public Component {
 public:
 	BoxShape2D(GameObject* myObject_, Subsystem* mySystem_, sf::RenderWindow* window_, Vector2 pos_, Vector2 size_, std::string fileName_) : Component(ComponentType::BoxShape2D, myObject_, mySystem_) {
+		
+		//shape setup
+		
 		myShape = new sf::RectangleShape;
 
 		window = window_;		
@@ -18,7 +21,7 @@ public:
 		myShape->setSize(size);
 		
 	
-
+		// get texture
 		objTexture = new sf::Texture;
 
 		if (!objTexture->loadFromFile(fileName_))
@@ -28,6 +31,7 @@ public:
 
 		myShape->setTexture(objTexture);
 
+		//make object body position to shape position
 		b2Position = new b2Vec2;
 		b2Position->Set(temp.x, temp.y);
 		myObject->SetBodyPos(b2Position);

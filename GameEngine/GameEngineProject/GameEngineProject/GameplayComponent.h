@@ -14,9 +14,12 @@ class GameplayComponent : public Component
 public:
 	GameplayComponent(GameObject* myObject_, Subsystem* mySystem_, std::vector<Vector2> waypoint_) : Component(ComponentType::Gameplay, myObject_, mySystem_), waypoints(waypoint_)
 	{		
+		//initialize variables
 		bulletPos = b2Vec2(0, 0);
-
-		currentBehaviour = nullptr; behaviours = new std::vector<Behaviour*>; inRange = false; isShot = false;
+		currentBehaviour = nullptr;
+		behaviours = new std::vector<Behaviour*>;
+		inRange = false;
+		isShot = false;
 		count = 0;
 		dir = -1.0f;
 		movingLeft = true;
@@ -33,6 +36,7 @@ public:
 	~GameplayComponent() { }
 	GameplayComponent& operator=(const GameplayComponent& other);
 
+	//Gameplay behaviour
 	std::vector<Behaviour*>* GetBehaviours() { return behaviours; }
 	Behaviour* GetCurrentBehaviour() { return currentBehaviour; }
 	void SetCurrentBehaviour(Behaviour* behaviour_) { currentBehaviour = behaviour_; }
@@ -43,10 +47,13 @@ public:
 	inline int GetBehaviourCount() { if (behaviours != nullptr) return behaviours->size(); return -1; }
 
 	void SetPatrol();
+	
+	//get new waypoint to go to
 	Vector2 GoToNextWaypoint() { return waypoints[newWaypoint]; }
 
 	void Update();
 
+	//set bullet position/direction
 	inline void SetBulletPos(b2Vec2 playerPos_) 
 	{
 		bulletPos.Set(playerPos_.x, playerPos_.y);
@@ -54,16 +61,16 @@ public:
 	inline void SetIsShot(bool isShot_) { isShot = isShot_; }
 	inline void SetShotDirection()
 	{
-		
-
-		
+				
 		hasBeenShot = true;
 
 		b2Vec2 dir;
 		float speed = 1;
 
+		//get mouse position
 		sf::Vector2i mousePos = sf::Mouse::getPosition(*GraphicsSubsystem::GetWindow());
 
+		//make direction be distance between mouse and object current position
 		dir.x = mousePos.x - myObject->GetPosition().x;
 		dir.y = (mousePos.y - myObject->GetPosition().y) * -1.0f;
 
@@ -71,9 +78,12 @@ public:
 		dir *= speed;
 		shotDirection = dir;
 
+		//if bullet was shot then reset bullet position to player position with offset
 		if (hasBeenShot)
 			myObject->GetBody()->SetTransform(myObject->GetPlayerPos() + (b2Vec2(shotDirection.x * 0.25f, shotDirection.y * 0.25)), 0);
 	}
+
+
 	inline void SetInRange(bool inRange_) { inRange = inRange_; }
 
 	bool isShot;

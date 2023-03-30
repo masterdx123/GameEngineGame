@@ -17,16 +17,12 @@ UIComponent& UIComponent::operator=(const UIComponent& other)
 
 void UIComponent::Update()
 {
+	//set objects and systems vectors
 	std::vector<GameObject*> objects;
 	std::vector<SubsystemType> systems;
-	//Event* event; //= new Event();
 	int i;
-	//std::cout << myObject->GetClientIndex() << std::endl;
-	/*if (myObject->GetClientIndex() == 0)
-	{
-		
-	}*/
 	
+	//check if W key was pressed and initialize a move upwards event
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		Event* event = new Event();
@@ -42,6 +38,7 @@ void UIComponent::Update()
 		mySystem->GetEventQueue()->events.push_back(event);
 	}
 
+	//check if A key was pressed and initialize a move leftwards event
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		Event* event = new Event();
@@ -58,6 +55,7 @@ void UIComponent::Update()
 		mySystem->GetEventQueue()->events.push_back(event);
 	}
 
+	//check if S key was pressed and initialize a move downwards event
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		Event* event = new Event();
@@ -74,6 +72,7 @@ void UIComponent::Update()
 		mySystem->GetEventQueue()->events.push_back(event);
 	}
 
+	//check if D key was pressed and initialize a move rightwards event
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		Event* event = new Event();
@@ -91,6 +90,7 @@ void UIComponent::Update()
 
 	}
 	
+	//check if mouse left key was pressed and initialize a shot event
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		Event* event = new Event();

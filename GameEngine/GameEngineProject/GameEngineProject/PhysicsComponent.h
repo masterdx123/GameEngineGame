@@ -8,6 +8,8 @@ public:
 	PhysicsComponent(GameObject* myObject_, Subsystem* mySystem_, float HalfWidth_) : Component(ComponentType::Physics, myObject_, mySystem_) {
 		speed = 0.2f;
 		HalfWidth = HalfWidth_;
+		
+		//Create physics body
 		SetCollisionShape();
 		
 	};
@@ -29,6 +31,7 @@ public:
 	void SetCollisionShape();
 	void ChangeCoordinatesToGraphics();
 
+	//set and get speed
 	inline void SetSpeed(float speed_) { speed = speed_; }
 	inline float GetSpeed() { return speed; }
 	

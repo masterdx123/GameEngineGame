@@ -5,7 +5,7 @@
 #include "GameplaySubsystem.h"
 
 
-
+//copy constructor
 GameplayComponent::GameplayComponent(const GameplayComponent& other) : Component(other.type, other.myObject, other.mySystem)
 {
 	
@@ -48,8 +48,10 @@ void GameplayComponent::Update()
 	Event* event = new Event();
 	int i;
 	
+
 	if (myObject->GetName() == "Enemy")
 	{
+		//keep the enemy patrolling until something gets in range
 		if (inRange)
 		{
 			std::unordered_map<BehaviourType, Behaviour*>::const_iterator it = behaviourMap.find(BehaviourType::Hunt);
@@ -70,7 +72,7 @@ void GameplayComponent::Update()
 		{
 			std::unordered_map<BehaviourType, Behaviour*>::const_iterator it = behaviourMap.find(BehaviourType::Patrol);
 
-
+			//move enemy from waypoint coordinates from one to another repeatedly
 			if (myObject->GetBody()->GetPosition().x > (GoToNextWaypoint().x - 0.1) && myObject->GetBody()->GetPosition().x < (GoToNextWaypoint().x + 0.1)
 				&& myObject->GetBody()->GetPosition().y >(GoToNextWaypoint().y - 0.1) && myObject->GetBody()->GetPosition().y < (GoToNextWaypoint().y + 0.1))
 			{
@@ -85,7 +87,7 @@ void GameplayComponent::Update()
 				}
 			}
 
-
+			//set velocity of the enemy to move into the waypoint
 			myObject->GetBody()->SetLinearVelocity(speed * (b2Vec2(GoToNextWaypoint().x, GoToNextWaypoint().y)
 				- b2Vec2(myObject->GetBody()->GetPosition().x, myObject->GetBody()->GetPosition().y)));
 
@@ -94,8 +96,10 @@ void GameplayComponent::Update()
 		}
 	}	
 	
+
 	if (myObject->GetName() == "Bullet" && isShot)
 	{
+		//set velocity of bullet to be the direction its shooting
 		myObject->GetBody()->SetLinearVelocity(shotDirection);			
 	}
 		
@@ -104,6 +108,7 @@ void GameplayComponent::Update()
 	
 }
 
+//add a behaviour to the map
 void GameplayComponent::AddBehaviour(BehaviourType type_, std::string myString_)
 {
 	Behaviour* temp = new Behaviour(type_, myString_);
@@ -111,6 +116,7 @@ void GameplayComponent::AddBehaviour(BehaviourType type_, std::string myString_)
 	behaviourMap.insert({ type_, behaviours->back() });
 }
 
+//set the patrol state to be the current behaviour
 void GameplayComponent::SetPatrol()
 {
 	for (int i = 0; i < behaviours->size(); i++)

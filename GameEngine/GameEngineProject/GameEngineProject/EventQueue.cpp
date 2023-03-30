@@ -4,7 +4,7 @@
 #include "BulletComponent.h"
 
 
-
+//function to move an object upwards
 void PhysicsMoveUp(Event* event_)
 {
 	b2Vec2 temp = event_->objects[0]->GetDir();
@@ -14,6 +14,7 @@ void PhysicsMoveUp(Event* event_)
 	event_->objects[0]->SetDir(temp);
 }
 
+//function to move an object downwards
 void PhysicsMoveDown(Event* event_)
 {
 	
@@ -24,6 +25,7 @@ void PhysicsMoveDown(Event* event_)
 	event_->objects[0]->SetDir(temp);
 }
 
+//function to move an object leftwards
 void PhysicsMoveLeft(Event* event_)
 {
 	
@@ -34,6 +36,7 @@ void PhysicsMoveLeft(Event* event_)
 	event_->objects[0]->SetDir(temp);
 }
 
+//function to move an object rightwards
 void PhysicsMoveRight(Event* event_)
 {
 	
@@ -44,6 +47,7 @@ void PhysicsMoveRight(Event* event_)
 	event_->objects[0]->SetDir(temp);
 }
 
+//function to set the 2nd player position to the position given from the server
 void PhysicsMovePlayer2(Event* event_) {
 
 	for (int i = 0; i < event_->objects.size(); i++)
@@ -60,7 +64,7 @@ void PhysicsMovePlayer2(Event* event_) {
 
 }
 
-
+//function to handle the movement of the enemy 
 void AIMovement(Event* event_)
 {
 	for (int i = 0; i < event_->objects.size(); i++)
@@ -72,14 +76,13 @@ void AIMovement(Event* event_)
 			Component* ptr = temp->GetComponent(ComponentType::Gameplay);
 			GameplayComponent* tempAI = static_cast<GameplayComponent*>(ptr);
 			tempAI->SetInRange(false);
-
-			//handle speed and change body pos here
 		}
 		
 	}
 
 }
 
+//function for the shoot event
 void ShotEvent(Event* event_) {
 
 	for (int i = 0; i < event_->objects.size(); i++)
@@ -108,9 +111,10 @@ void ShotEvent(Event* event_) {
 
 
 
-
+//initialization of function maps
 void EventQueue::InitialiseFunctionMaps()
 {
+	//physics movement map
 	std::unordered_map<EventType, void(*)(Event*)>* movementMap = new std::unordered_map<EventType, void(*)(Event*)>;
 
 	movementMap->insert({ EventType::MoveUp, &PhysicsMoveUp }); 
@@ -122,7 +126,7 @@ void EventQueue::InitialiseFunctionMaps()
 	functionMaps.push_back(movementMap);
 	functionMap.insert({ SubsystemType::Physics, movementMap });
 
-	
+	//gameplay (enemy AI, bullet movement) map
 
 	std::unordered_map<EventType, void(*)(Event*)>* gameplayMap = new std::unordered_map<EventType, void(*)(Event*)>;
 
@@ -133,6 +137,7 @@ void EventQueue::InitialiseFunctionMaps()
 	functionMap.insert({ SubsystemType::Gameplay, gameplayMap });
 }
 
+//deletion of events
 void EventQueue::deleteEvents(Event* event_)
 {
 	for (int i = 0; i < events.size(); i++)

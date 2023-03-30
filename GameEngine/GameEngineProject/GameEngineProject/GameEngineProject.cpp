@@ -13,13 +13,15 @@ extern GameEngine* myGame = new GameEngine();
 AudioSubsystem audio;
 
 int main() {
-		
+	
+	//load and play music
 	if (audio.loadMusic()) {
 		audio.playMusic();
 	}
 
    bool running = true;
 
+   //run the game
    while (running)
    {
        running = myGame->Update();

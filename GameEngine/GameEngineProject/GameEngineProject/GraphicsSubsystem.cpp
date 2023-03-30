@@ -5,6 +5,7 @@ sf::RenderWindow* GraphicsSubsystem::window;
 
 Component* GraphicsSubsystem::AddComponent(Component* component_)
 {
+	//add graphics component to vector of graphics components
 	if (component_->GetType() == ComponentType::BoxShape2D)
 	{
 		BoxShape2D* temp = static_cast<BoxShape2D*>(component_);
@@ -25,6 +26,7 @@ void GraphicsSubsystem::Update()
                      
 void GraphicsSubsystem::Render()
 {
+	//make window cyan color
 	window->clear(sf::Color::Cyan);	
 
 	//go through all graphics components and update them
@@ -32,6 +34,8 @@ void GraphicsSubsystem::Render()
 
 		component.Update();
 	}
+
+	//display window
 	window->display();
 
 	int eQsize = eventQueue->events.size();
@@ -42,9 +46,7 @@ void GraphicsSubsystem::Render()
 
 		for (int i = 0; i < eQsize; i++)
 		{
-			/* If there's an event, we check it out, and see if it's
-			 * something this subsystem cares about (== type).
-			 */
+			//check if there is an event that matches the type of this subsystem
 
 			temp = eventQueue->events[i];
 
@@ -52,40 +54,27 @@ void GraphicsSubsystem::Render()
 			{
 				if (temp->systems[j] == type)
 				{
-					/* If we care about it, we know we'll have a function
-					 * to deal with it somewhere in the eventQueue.
-					 */
+					//if that happens find the function in the eventqueue corresponding to the event
 
 					auto it = eventQueue->functionMap.find(type);
 
 					auto it2 = it->second->find(temp->type);
 
-					/* We find our function and pass in the event as its
-					 * parameter. We then pop our subsystem off the event's
-					 * subsystem list, so we don't react to it twice!
-					 */
+					//pass the event as the parameter and pop this subsystem off the list of events
 
 					it2->second(temp);
 
 					temp->systems.erase(temp->systems.begin() + j);
 
-					/* If we were the last subsystem to react to the event,
-					 * we remove it from the event queue entirely, to save
-					 * memory.
-					 */
+					//if its the last remove event from event queue
 
 					if (temp->systems.size() == 0 && eventQueue->events[i] != nullptr)
 					{
 						delete eventQueue->events[i];
-						//eventQueue->events.erase(eventQueue->events.begin() + i);
 					}
 				}
 			}
 		}
-	}
-	
-
-	
-	
+	}	
 }
 

@@ -2,7 +2,7 @@
 #include "Subsystem.h"
 #include "NetComponent.h"
 
-
+//Set Network subsystem
 class NetSubsystem : public Subsystem
 {
 public:

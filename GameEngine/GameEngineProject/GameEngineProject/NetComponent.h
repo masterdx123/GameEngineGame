@@ -5,17 +5,19 @@
 #include "EventQueue.h"
 
 
-
+//new positions from the server
 struct PhysicsData {
 	int packetType = 1;
 	Vector2 positions[2];
 };
 
+//client id
 struct ClientData {
 	int packetType = 0;
 	int clientIndex;
 };
 
+//positions from 2 player objs in client
 struct ClientPacket {
 	int clientIndex;
 	Vector2 position;
@@ -27,12 +29,14 @@ public:
 
 		address = new ENetAddress();
 		enetEvent = new ENetEvent();
+
+		//check if Enet was initialized
 		if (enet_initialize() != 0)
 		{
 			std::cout << "Enet failed to initialise!" << "\n\n";
 		}
 
-
+		//create client
 		client = enet_host_create(NULL, 1, 2, 0, 0);
 
 		if (client == NULL)
@@ -40,9 +44,11 @@ public:
 			std::cout << "Client failed to initialise!" << "\n\n";
 		}
 
+		//Set host values to local and port to 1234
 		enet_address_set_host(address, "localhost");
 		address->port = 1234;
 
+		//put everything together in a peer
 		peer = enet_host_connect(client, address, 2, 0);
 
 		if (peer == NULL) {

@@ -30,6 +30,7 @@ GameObject::GameObject(std::string name_, std::unordered_map<ComponentType, Comp
 
 void GameObject::Update(float deltaTime)
 {
+	//go trough all childs updates
 	for (auto child : children) {
 
 		if (child->isActive)
@@ -41,6 +42,7 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::Render()
 {
+	//go trough all childs render
 	for (auto child : children) {
 
 		if (child->isActive)
@@ -50,13 +52,16 @@ void GameObject::Render()
 	}
 }
 
+
 void GameObject::AddComponent(Component* component_)
 {	
+	//add a component to the gameobject
 	components.insert({ component_->GetType(), component_ });
 }
 
 Component* GameObject::GetComponent(ComponentType type_)
 {
+	//get the gameobject component
 	auto it = components.find(type_);
 	if (it == components.end())
 	{
@@ -71,11 +76,13 @@ Component* GameObject::GetComponent(ComponentType type_)
 
 void GameObject::SetBodyPos(b2Vec2* pos_)
 {
+	//set a body pos
 	pos.push_back(pos_);
 }
 
 GameObject* GameObject::AddChild(GameObject* child_)
 {
+	//add a child to a gameobject
 	child_->SetParent(this);
 	children.push_back(child_);
 	return child_;
@@ -83,11 +90,13 @@ GameObject* GameObject::AddChild(GameObject* child_)
 
 GameObject* GameObject::GetChild(int index_) const
 {
+	//return child of gameobject
 	return children[index_];
 }
 
 GameObject* GameObject::Find(const std::string& name_) const
 {
+	//find child of a gameobject 
 	if (*this->name == name_)
 	{
 		return const_cast<GameObject*>(this);
@@ -105,28 +114,30 @@ GameObject* GameObject::Find(const std::string& name_) const
 
 GameObject* GameObject::GetParent() const
 {
+	//get parent of a gameobject
 	return parent;
 }
 
 void GameObject::SetParent(GameObject* parent_)
 {
+	//set gameobject to be a parent
 	this->parent = parent_;
-	//transform.SetParent(&parent->transform);
 	parent->children.push_back(this);
 }
 
 void GameObject::RemoveChild(GameObject* child_)
 {
+	//remove a child from a gameobject
 	auto it = std::find(children.begin(), children.end(), child_);
 	if (it != children.end())
 	{
-		//child_->transform.SetParent(nullptr);
 		children.erase(it);
 	}
 }
 
 int GameObject::GetChildCount() const
 {
+	//get the child count from a gameobject
 	return static_cast<int>(children.size());
 }
 

@@ -170,7 +170,6 @@
     <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="UISubsystem.cpp" />
     <ClCompile Include="PhysicsSubsystem.cpp" />
-    <ClCompile Include="BulletComponent.cpp" />
     <ClCompile Include="IOSubsystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,7 +195,6 @@
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="PhysicsSubsystem.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="BulletComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

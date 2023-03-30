@@ -4,8 +4,8 @@
 #include "Common.h"
 #include "Subsystem.h"
 #include "GameplayComponent.h"
-#include "BulletComponent.h"
 
+//Set Gameplay subsystem
 class GameplaySubsystem : public Subsystem
 {
 public:

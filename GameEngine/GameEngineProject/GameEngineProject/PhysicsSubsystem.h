@@ -3,7 +3,7 @@
 #include "Subsystem.h"
 #include "PhysicsComponent.h"
 
-
+//Set Physics subsystem
 class PhysicsSubsystem : public Subsystem {
 public:
 	PhysicsSubsystem(EventQueue* eventQueue_, std::vector<GameObject*>* gameObjects_) : Subsystem(SubsystemType::Physics, eventQueue_, gameObjects_) {

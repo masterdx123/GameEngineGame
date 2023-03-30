@@ -18,6 +18,7 @@ PhysicsComponent& PhysicsComponent::operator=(const PhysicsComponent& other)
 
 void PhysicsComponent::SetCollisionShape()
 {
+	// create body def, fixture and set box for the object and apply everything to the body
 	scalingFactor = 200.0f;	
 	
 	
@@ -44,7 +45,7 @@ void PhysicsComponent::SetCollisionShape()
 
 void PhysicsComponent::ChangeCoordinatesToGraphics()
 {
-	
+	//change coordinates from physics position onto graphics position and send them to graphics component to update position
 	sf::Vector2f playerGraphicsPosition;
 	b2Vec2 playerPhysicsPosition = body->GetPosition();
 
@@ -60,6 +61,7 @@ void PhysicsComponent::Update()
 {
 	if (body != nullptr)
 	{
+		// get object direction, normalize it and apply velocity to the body 
 		b2Vec2 dir = myObject->GetDir();
 		dir.Normalize();
 
@@ -67,6 +69,7 @@ void PhysicsComponent::Update()
 
 		body->SetLinearVelocity(dir);		
 		 
+		//call change coordinates to graphics 
 		ChangeCoordinatesToGraphics();
 	}
 	else
@@ -74,5 +77,6 @@ void PhysicsComponent::Update()
 		std::cout << "There is no player" << std::endl;
 	}
 
+	//reset object direction
 	myObject->ResetDir();
 }

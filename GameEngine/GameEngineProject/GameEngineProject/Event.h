@@ -19,6 +19,7 @@ public:
 
 	Event& operator=(const Event& other) { if (this == &other) return *this; Event a(other.type, other.objects, other.systems); return a; };
 
+	//assign functions
 	void assignType(EventType type_) { type = type_; }
 	void assignObjects(std::vector<GameObject*> objects_) { objects = objects_; }
 	void assignSystems(std::vector<SubsystemType> systems_) { systems = systems_; }
