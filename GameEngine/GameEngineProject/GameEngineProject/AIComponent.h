@@ -10,10 +10,11 @@
 
 class AIComponent : public Component
 {
+
 public:
 	AIComponent(GameObject* myObject_, Subsystem* mySystem_, std::vector<Vector2> waypoint_) : Component(ComponentType::AI, myObject_, mySystem_), waypoints(waypoint_)
 	{		
-		
+		bulletPos = b2Vec2(0, 0);
 
 		currentBehaviour = nullptr; behaviours = new std::vector<Behaviour*>; inRange = false; isShot = false;
 		count = 0;
@@ -29,7 +30,7 @@ public:
 	};
 
 	AIComponent(const AIComponent& other);
-
+	~AIComponent() { }
 	AIComponent& operator=(const AIComponent& other);
 
 	std::vector<Behaviour*>* GetBehaviours() { return behaviours; }
@@ -46,11 +47,15 @@ public:
 
 	void Update();
 
+	inline void SetBulletPos(b2Vec2 playerPos_) 
+	{
+		bulletPos.Set(playerPos_.x, playerPos_.y);
+	}
 	inline void SetIsShot(bool isShot_) { isShot = isShot_; }
 	inline void SetShotDirection()
 	{
 		if (hasBeenShot)
-			return;
+			myObject->GetBody()->SetTransform(myObject->GetPlayerPos(),0);
 
 		
 		hasBeenShot = true;
@@ -70,6 +75,7 @@ public:
 	inline void SetInRange(bool inRange_) { inRange = inRange_; }
 
 	bool isShot;
+	b2Vec2 bulletPos;
 private:
 	std::vector<Behaviour*>* behaviours;
 	std::unordered_map<BehaviourType, Behaviour*> behaviourMap;
@@ -83,7 +89,5 @@ private:
 	int newWaypoint;
 	bool hasBeenShot = false;
 	b2Vec2 shotDirection = b2Vec2(0,0);
-
-	
 	
 };

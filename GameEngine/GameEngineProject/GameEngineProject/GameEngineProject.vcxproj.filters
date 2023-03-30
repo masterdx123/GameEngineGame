@@ -88,7 +88,7 @@
       <Filter>Arquivos de Origem\Subsystems</Filter>
     </ClCompile>
     <ClCompile Include="UISubsystem.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Arquivos de Origem\Subsystems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,9 +156,6 @@
       <Filter>Arquivos de Cabeçalho\Subsystems</Filter>
     </ClInclude>
     <ClInclude Include="NetComponent.h">
-      <Filter>Arquivos de Cabeçalho\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="UIComponent.h">
       <Filter>Arquivos de Cabeçalho\Components</Filter>
     </ClInclude>
     <ClInclude Include="UISubsystem.h">

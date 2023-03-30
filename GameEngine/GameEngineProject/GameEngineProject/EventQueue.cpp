@@ -85,7 +85,15 @@ void ShotEvent(Event* event_) {
 	for (int i = 0; i < event_->objects.size(); i++)
 	{
 		GameObject* temp = event_->objects[i];
-
+		b2Vec2 tempPos;
+		if (temp->GetName() == "Player")
+		{
+			Component* ptr = temp->GetComponent(ComponentType::AI);
+			AIComponent* tempBullet = static_cast<AIComponent*>(ptr);
+			tempPos = temp->GetBody()->GetPosition();
+			tempPos += b2Vec2(0.0, 0.2);
+			//temp->SetPlayerPos(temp->GetBody()->GetPosition());
+		}
 		if (temp->GetName() == "Bullet")
 		{
 			Component* ptr = temp->GetComponent(ComponentType::AI);
@@ -93,7 +101,9 @@ void ShotEvent(Event* event_) {
 			bool test1 = tempBullet->isShot;
 			tempBullet->SetIsShot(true);
 			tempBullet->SetShotDirection();
+			temp->SetPlayerPos(tempPos);
 		}
+		
 	}
 }
 

@@ -192,7 +192,6 @@
     <ClInclude Include="IOComponent.h" />
     <ClInclude Include="IOSubsystem.h" />
     <ClInclude Include="Subsystem.h" />
-    <ClInclude Include="UIComponent.h" />
     <ClInclude Include="UISubsystem.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="PhysicsSubsystem.h" />

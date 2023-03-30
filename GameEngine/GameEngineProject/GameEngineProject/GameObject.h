@@ -53,6 +53,15 @@ public:
 	inline void SetClientIndex(int clientIndex_) { clientIndex = clientIndex_; }
 	inline int GetClientIndex() { return clientIndex; }
 
+	void SetPlayerPos(b2Vec2 playerPos_) { playerPos = playerPos_;
+	
+	}
+	b2Vec2 GetPlayerPos() {
+		std::cout << playerPos.x << std::endl;
+		std::cout << playerPos.y << std::endl; 
+		return playerPos;
+	
+	}
 private:
 	int objectID;
 	std::string* name;
@@ -64,4 +73,5 @@ private:
 	b2Vec2 direction;
 	std::vector<b2Vec2*> pos;
 	int clientIndex;
+	b2Vec2 playerPos;
 };

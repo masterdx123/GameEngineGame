@@ -18,10 +18,10 @@ GameEngine::GameEngine()
 	eventQueue = new EventQueue();
 
 	// Create the game subsystems
-	PhysicsSubsystem* physicsSubsystem = new PhysicsSubsystem(eventQueue, gameObjects);
-	subsystems->push_back(physicsSubsystem);
 	GraphicsSubsystem* graphicsSubsystem = new GraphicsSubsystem(eventQueue, gameObjects);
 	subsystems->push_back(graphicsSubsystem);
+	PhysicsSubsystem* physicsSubsystem = new PhysicsSubsystem(eventQueue, gameObjects);
+	subsystems->push_back(physicsSubsystem);	
 	IOSubsystem* ioSubsystem = new IOSubsystem(eventQueue, gameObjects);
 	subsystems->push_back(ioSubsystem);
 	AISubsystem* aiSubsystem = new AISubsystem(eventQueue, gameObjects);

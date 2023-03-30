@@ -22,89 +22,89 @@ void IOComponent::Update()
 	std::vector<SubsystemType> systems;
 	//Event* event; //= new Event();
 	int i;
-
-	if (myObject->GetClientIndex() == 0)
+	//std::cout << myObject->GetClientIndex() << std::endl;
+	/*if (myObject->GetClientIndex() == 0)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		{
-			Event* event = new Event();
+		
+	}*/
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		Event* event = new Event();
 
-			for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
-			{
-				objects.push_back(mySystem->GetGameObjects()->at(i));
-			}
-			systems.push_back(SubsystemType::Physics);
-			event->assignObjects(objects);
-			event->assignSystems(systems);
-			event->assignType(EventType::MoveUp);
-			mySystem->GetEventQueue()->events.push_back(event);
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		{
+			objects.push_back(mySystem->GetGameObjects()->at(i));
+		}
+		systems.push_back(SubsystemType::Physics);
+		event->assignObjects(objects);
+		event->assignSystems(systems);
+		event->assignType(EventType::MoveUp);
+		mySystem->GetEventQueue()->events.push_back(event);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		Event* event = new Event();
+
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		{
+			objects.push_back(mySystem->GetGameObjects()->at(i));
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		systems.push_back(SubsystemType::Physics);
+		event->assignObjects(objects);
+		event->assignSystems(systems);
+		event->assignType(EventType::MoveLeft);
+		mySystem->GetEventQueue()->events.push_back(event);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		Event* event = new Event();
+
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
 		{
-			Event* event = new Event();
-
-			for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
-			{
-				objects.push_back(mySystem->GetGameObjects()->at(i));
-			}
-
-			systems.push_back(SubsystemType::Physics);
-			event->assignObjects(objects);
-			event->assignSystems(systems);
-			event->assignType(EventType::MoveLeft);
-			mySystem->GetEventQueue()->events.push_back(event);
+			objects.push_back(mySystem->GetGameObjects()->at(i));
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		systems.push_back(SubsystemType::Physics);
+		event->assignObjects(objects);
+		event->assignSystems(systems);
+		event->assignType(EventType::MoveDown);
+		mySystem->GetEventQueue()->events.push_back(event);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		Event* event = new Event();
+
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
 		{
-			Event* event = new Event();
-
-			for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
-			{
-				objects.push_back(mySystem->GetGameObjects()->at(i));
-			}
-
-			systems.push_back(SubsystemType::Physics);
-			event->assignObjects(objects);
-			event->assignSystems(systems);
-			event->assignType(EventType::MoveDown);
-			mySystem->GetEventQueue()->events.push_back(event);
+			objects.push_back(mySystem->GetGameObjects()->at(i));
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-			Event* event = new Event();
+		systems.push_back(SubsystemType::Physics);
+		event->assignObjects(objects);
+		event->assignSystems(systems);
+		event->assignType(EventType::MoveRight);
+		mySystem->GetEventQueue()->events.push_back(event);
 
-			for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
-			{
-				objects.push_back(mySystem->GetGameObjects()->at(i));
-			}
-
-			systems.push_back(SubsystemType::Physics);
-			event->assignObjects(objects);
-			event->assignSystems(systems);
-			event->assignType(EventType::MoveRight);
-			mySystem->GetEventQueue()->events.push_back(event);
-
-		}
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			Event* event = new Event();
-
-			for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
-			{
-				objects.push_back(mySystem->GetGameObjects()->at(i));
-			}
-			systems.push_back(SubsystemType::AI);
-			event->assignObjects(objects);
-			event->assignSystems(systems);
-			event->assignType(EventType::Shot);
-			mySystem->GetEventQueue()->events.push_back(event);
-		}
 	}
 	
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		Event* event = new Event();
 
+		for (i = 0; i < mySystem->GetGameObjects()->size(); i++)
+		{
+			objects.push_back(mySystem->GetGameObjects()->at(i));
+		}
+		systems.push_back(SubsystemType::AI);
+		event->assignObjects(objects);
+		event->assignSystems(systems);
+		event->assignType(EventType::Shot);
+		mySystem->GetEventQueue()->events.push_back(event);
+	}
 	
 }

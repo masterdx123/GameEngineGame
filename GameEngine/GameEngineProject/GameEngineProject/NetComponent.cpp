@@ -73,9 +73,11 @@ void NetComponent::Update()
 		
 		clientPacket->position.x = myObject->GetBody()->GetPosition().x;
 		clientPacket->position.y = myObject->GetBody()->GetPosition().y;
+
+		dataPacket = enet_packet_create(clientPacket, sizeof(ClientPacket), ENET_PACKET_FLAG_RELIABLE);
+		enet_peer_send(peer, 0, dataPacket);
 	}
 	
 
-	dataPacket = enet_packet_create(clientPacket, sizeof(ClientPacket), ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, dataPacket);
+	
 }
