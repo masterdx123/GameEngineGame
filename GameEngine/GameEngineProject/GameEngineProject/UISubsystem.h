@@ -1,18 +1,24 @@
 #pragma once
-#include <jsoncpp/json/json.h>
-#include "Common.h"
 
-class GameEngine;
-class UISubsystem
+#include "Common.h"
+#include "Subsystem.h"
+#include "UIComponent.h"
+
+class UISubsystem : public Subsystem
 {
 public:
-	UISubsystem(std::string path_, GameEngine* gameEngine_);
+	UISubsystem(EventQueue* eQ_, std::vector<GameObject*>* gameObjects_) : Subsystem(SubsystemType::UI, eQ_, gameObjects_) {
+		components = new std::vector<UIComponent>;
 
+	};
+
+	Component* AddComponent(Component* component_);
+	void RemoveComponent(int i_) { components->erase(components->begin() + i_); }
+	Component* GetComponent(int i_) { return &(components->at(i_)); }
+
+	void Update();
+	int GetNumComponents() { return components->size(); }
 
 private:
-	std::string path;
-	Json::Value fileData;
-
-	GameEngine* gameEngine;
+	std::vector<UIComponent>* components;
 };
-

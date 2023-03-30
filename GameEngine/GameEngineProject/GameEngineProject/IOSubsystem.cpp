@@ -1,66 +1,56 @@
 #include "IOSubsystem.h"
-#include "EventQueue.h"
+#include <fstream>
+#include "GameEngine.h"
+#include "GameObject.h"
+#include "GraphicsSubsystem.h"
+#include "PhysicsComponent.h"
+#include "UIComponent.h"
+#include "NetComponent.h"
+#include "GameplayComponent.h"
 
-Component* IOSubsystem::AddComponent(Component* component_)
+IOSubsystem::IOSubsystem(std::string path_, GameEngine* gameEngine_) : path(path_), gameEngine(gameEngine_)
 {
-	if (component_->GetType() == ComponentType::IO)
-	{
-		IOComponent* temp = static_cast<IOComponent*>(component_);
-		components->push_back(*temp);
-		return &(components->back());
-	}
-	else
-	{
-		std::cout << "Tried to push a non-IO component to the IO subsystem" << std::endl;
-		return nullptr;
-	}
-}
+	std::ifstream fileStream(path);
 
-void IOSubsystem::Update()
-{	
-	// update components bellonging to IO subsystem
-	for (int i = 0; i < components->size(); i++)
-	{
-		components->at(i).Update();
-	}
+	fileStream >> fileData;
+	fileStream.close();
 
-	int eQsize = eventQueue->events.size();
+	Json::Value objects = fileData["objects"];
+	for (const auto& obj : objects) {
 
-	if (eQsize > 0)
-	{
-		Event* temp;
 
-		for (int i = 0; i < eQsize; i++)
-		{
-			
+		gameEngine->gameObjects->push_back(new GameObject(obj["name"].asString()));
 
-			temp = eventQueue->events[i];
+		//std::cout << obj["name"].asString() << std::endl;
+		GraphicsSubsystem* tempptr = static_cast<GraphicsSubsystem*>(gameEngine->subsystems->at(0));
 
-			for (int j = 0; j < temp->systems.size(); j++)
-			{
-				if (temp->systems[j] == type)
-				{
-					
+		std::vector<Vector2> enemyWaypoints = { Vector2(1.0f, -1.0f), Vector2(3.0f,-1.0f) };
 
-					auto it = eventQueue->functionMap.find(type);
+		//std::cout << obj["GraphicsComponent"].asBool() << std::endl;
+		//std::cout << obj["IOComponent"].asBool() << std::endl;
 
-					auto it2 = it->second->find(temp->type);
-
-					
-
-					it2->second(temp);
-
-					temp->systems.erase(temp->systems.begin() + j);
-
-					
-
-					if (temp->systems.size() == 0 && eventQueue->events[i] != nullptr)
-					{
-						delete eventQueue->events[i];
-						//eventQueue->events.erase(eventQueue->events.begin() + i);
-					}
-				}
-			}
+		if (obj["GraphicsComponent"].asBool()) {
+			BoxShape2D* playerBoxShape = new BoxShape2D(gameEngine->gameObjects->back(), gameEngine->subsystems->at(0), tempptr->GetWindow(), Vector2(obj["posX"].asFloat(), obj["posY"].asFloat()), Vector2(obj["scaleX"].asFloat(), obj["scaleY"].asFloat()), obj["texture"].asString());
+			Component* a = gameEngine->subsystems->at(0)->AddComponent(playerBoxShape);
+			gameEngine->gameObjects->back()->AddComponent(a);
+		}	
+		if (obj["PhysicsComponent"].asBool()) {
+			PhysicsComponent* playerPhysics = new PhysicsComponent(gameEngine->gameObjects->back(), gameEngine->subsystems->at(1), obj["halfWidth"].asFloat());
+			gameEngine->gameObjects->back()->AddComponent(gameEngine->subsystems->at(1)->AddComponent(playerPhysics));
 		}
+		if (obj["UIComponent"].asBool()) {
+			UIComponent* playerIO = new UIComponent(gameEngine->gameObjects->back(), gameEngine->subsystems->at(2));
+			gameEngine->gameObjects->back()->AddComponent(gameEngine->subsystems->at(2)->AddComponent(playerIO));
+		}
+		if (obj["GameplayComponent"].asBool())
+		{
+			GameplayComponent* enemyAI = new GameplayComponent(gameEngine->gameObjects->back(), gameEngine->subsystems->at(3), enemyWaypoints);
+			gameEngine->gameObjects->back()->AddComponent(gameEngine->subsystems->at(3)->AddComponent(enemyAI));
+		}		
+		if (obj["NetComponent"].asBool()) {
+			NetComponent* player1Network = new NetComponent(gameEngine->gameObjects->back(), gameEngine->subsystems->at(4));
+			gameEngine->gameObjects->back()->AddComponent(gameEngine->subsystems->at(4)->AddComponent(player1Network));
+		}
+				
 	}
 }

@@ -8,11 +8,11 @@
       "scaleX": 50.0,
       "scaleY": 50.0,
       "halfWidth": 0.125,
-      "texture": "../Textures/catGame.jpg",
+      "texture": "../Textures/Player.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
-      "IOComponent": true,
-      "AIComponent": false,
+      "UIComponent": true,
+      "GameplayComponent": false,
       "NetComponent": true
     },    
     {
@@ -23,11 +23,11 @@
       "scaleX": 25.0,
       "scaleY": 25.0,
       "halfWidth": 0.0625,
-      "texture": "../Textures/catGame.jpg",
+      "texture": "../Textures/Bullet.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
-      "IOComponent": false,
-      "AIComponent": true,
+      "UIComponent": false,
+      "GameplayComponent": true,
       "NetComponent": false
     },
     {
@@ -38,11 +38,11 @@
       "scaleX": 50.0,
       "scaleY": 50.0,
       "halfWidth": 0.125,
-      "texture": "../Textures/enemycat.jpg",
+      "texture": "../Textures/Player2.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
-      "IOComponent": false,
-      "AIComponent": false,
+      "UIComponent": false,
+      "GameplayComponent": false,
       "NetComponent": true
     },
     {
@@ -53,11 +53,11 @@
       "scaleX": 100.0,
       "scaleY": 100.0,
       "halfWidth": 0.25,
-      "texture": "../Textures/keyboardcat.jpg",
+      "texture": "../Textures/Enemy.jpg",
       "PhysicsComponent": true,
       "GraphicsComponent": true,
-      "IOComponent": false,
-      "AIComponent": true,
+      "UIComponent": false,
+      "GameplayComponent": true,
       "NetComponent": false
     }
   ]

@@ -75,7 +75,7 @@
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)../Middleware\Box2D-2.3.0\Box2D;$(SolutionDir)../Middleware/enet-1.3.13/include;$(SolutionDir)/Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)../Middleware/Box2D-2.3.0/Box2D;$(SolutionDir)../Middleware/enet-1.3.13/include;$(SolutionDir)/Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)/lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -155,8 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AIComponent.cpp" />
-    <ClCompile Include="AISubsystem.cpp" />
+    <ClCompile Include="GameplayComponent.cpp" />
+    <ClCompile Include="GameplaySubsystem.cpp" />
     <ClCompile Include="Behaviour.cpp" />
     <ClCompile Include="NetComponent.cpp" />
     <ClCompile Include="NetSubsystem.cpp" />
@@ -167,15 +167,15 @@
     <ClCompile Include="GameEngineProject.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicsSubsystem.cpp" />
-    <ClCompile Include="IOComponent.cpp" />
-    <ClCompile Include="IOSubsystem.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="UISubsystem.cpp" />
     <ClCompile Include="PhysicsSubsystem.cpp" />
     <ClCompile Include="BulletComponent.cpp" />
-    <ClCompile Include="UISubsystem.cpp" />
+    <ClCompile Include="IOSubsystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIComponent.h" />
-    <ClInclude Include="AISubsystem.h" />
+    <ClInclude Include="GameplayComponent.h" />
+    <ClInclude Include="GameplaySubsystem.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Behaviour.h" />
     <ClInclude Include="NetComponent.h" />
@@ -189,10 +189,10 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicsSubsystem.h" />
     <ClInclude Include="Common.h" />
-    <ClInclude Include="IOComponent.h" />
-    <ClInclude Include="IOSubsystem.h" />
-    <ClInclude Include="Subsystem.h" />
+    <ClInclude Include="UIComponent.h" />
     <ClInclude Include="UISubsystem.h" />
+    <ClInclude Include="Subsystem.h" />
+    <ClInclude Include="IOSubsystem.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="PhysicsSubsystem.h" />
     <ClInclude Include="Transform.h" />

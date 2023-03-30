@@ -1,7 +1,5 @@
 #pragma once
 
-//#include "Component.h"
-//#include "Transform.h"
 #include "Common.h"
 #include "SFML/Graphics.hpp"
 #include <Box2D/Box2D.h>
@@ -53,15 +51,9 @@ public:
 	inline void SetClientIndex(int clientIndex_) { clientIndex = clientIndex_; }
 	inline int GetClientIndex() { return clientIndex; }
 
-	void SetPlayerPos(b2Vec2 playerPos_) { playerPos = playerPos_;
-	
-	}
-	b2Vec2 GetPlayerPos() {
-		std::cout << playerPos.x << std::endl;
-		std::cout << playerPos.y << std::endl; 
-		return playerPos;
-	
-	}
+	void SetPlayerPos(b2Vec2 playerPos_) { playerPos = playerPos_; }
+	b2Vec2 GetPlayerPos() { return playerPos; }
+
 private:
 	int objectID;
 	std::string* name;

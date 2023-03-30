@@ -1,6 +1,6 @@
 #include "EventQueue.h"
 #include "GameObject.h"
-#include "AIComponent.h"
+#include "GameplayComponent.h"
 #include "BulletComponent.h"
 
 
@@ -69,8 +69,8 @@ void AIMovement(Event* event_)
 
 		if (temp->GetName() == "Enemy")
 		{
-			Component* ptr = temp->GetComponent(ComponentType::AI);
-			AIComponent* tempAI = static_cast<AIComponent*>(ptr);
+			Component* ptr = temp->GetComponent(ComponentType::Gameplay);
+			GameplayComponent* tempAI = static_cast<GameplayComponent*>(ptr);
 			tempAI->SetInRange(false);
 
 			//handle speed and change body pos here
@@ -88,16 +88,15 @@ void ShotEvent(Event* event_) {
 		b2Vec2 tempPos;
 		if (temp->GetName() == "Player")
 		{
-			Component* ptr = temp->GetComponent(ComponentType::AI);
-			AIComponent* tempBullet = static_cast<AIComponent*>(ptr);
+			Component* ptr = temp->GetComponent(ComponentType::Gameplay);
+			GameplayComponent* tempBullet = static_cast<GameplayComponent*>(ptr);
 			tempPos = temp->GetBody()->GetPosition();
-			tempPos += b2Vec2(0.0, 0.2);
-			//temp->SetPlayerPos(temp->GetBody()->GetPosition());
+			
 		}
 		if (temp->GetName() == "Bullet")
 		{
-			Component* ptr = temp->GetComponent(ComponentType::AI);
-			AIComponent* tempBullet = static_cast<AIComponent*>(ptr);
+			Component* ptr = temp->GetComponent(ComponentType::Gameplay);
+			GameplayComponent* tempBullet = static_cast<GameplayComponent*>(ptr);
 			bool test1 = tempBullet->isShot;
 			tempBullet->SetIsShot(true);
 			tempBullet->SetShotDirection();
@@ -125,13 +124,13 @@ void EventQueue::InitialiseFunctionMaps()
 
 	
 
-	std::unordered_map<EventType, void(*)(Event*)>* aiMap = new std::unordered_map<EventType, void(*)(Event*)>;
+	std::unordered_map<EventType, void(*)(Event*)>* gameplayMap = new std::unordered_map<EventType, void(*)(Event*)>;
 
-	aiMap->insert({ EventType::Movement, &AIMovement });
-	aiMap->insert({ EventType::Shot, &ShotEvent });
+	gameplayMap->insert({ EventType::Movement, &AIMovement });
+	gameplayMap->insert({ EventType::Shot, &ShotEvent });
 
-	functionMaps.push_back(aiMap);
-	functionMap.insert({ SubsystemType::AI, aiMap });
+	functionMaps.push_back(gameplayMap);
+	functionMap.insert({ SubsystemType::Gameplay, gameplayMap });
 }
 
 void EventQueue::deleteEvents(Event* event_)

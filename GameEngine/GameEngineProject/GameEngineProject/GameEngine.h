@@ -15,7 +15,6 @@ public:
 	~GameEngine();
 
 	int Update();
-	void SetupGame();
 
 	std::vector<GameObject*>* gameObjects;
 	std::vector<Subsystem*>* subsystems;
