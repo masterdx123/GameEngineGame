@@ -126,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/../Middleware/Box2D-2.3.0/Box2D/include;$(SolutionDir)/../Middleware/SFML-2.5.0/include;$(SolutionDir)/../Middleware/enet-1.3.13/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../Middleware/Box2D-2.3.0/Box2D/include;$(SolutionDir)/../Middleware/SFML-2.5.0/include;$(SolutionDir)/../Middleware/enet-1.3.13/include;$(SolutionDir)/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,7 +143,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/../Middleware/Box2D-2.3.0/Box2D/include;$(SolutionDir)/../Middleware/SFML-2.5.0/include;$(SolutionDir)/../Middleware/enet-1.3.13/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../Middleware/Box2D-2.3.0/Box2D/include;$(SolutionDir)/../Middleware/SFML-2.5.0/include;$(SolutionDir)/../Middleware/enet-1.3.13/include;$(SolutionDir)/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
